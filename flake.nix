@@ -18,6 +18,7 @@
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           git
+          gh
           jdk21
           jetbrains.idea
         ];
