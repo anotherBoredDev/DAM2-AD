@@ -10,10 +10,42 @@ public class MenuPrincipal {
     }
 
     public void iniciar() {
+        int opcion;
 
+        do {
+            mostrarMenu();
+            opcion = lectorConsola.leerEntero("Opción: ");
+            seleccionarOpcion(opcion);
+        } while (opcion != 0);
     }
 
-    public void finalizar() {
-        
+    private void mostrarMenu() {
+        System.out.println("=== GESTIÓN DE GASOLINERA ===");
+        System.out.println("1. Dar de alta un cliente");
+        System.out.println("2. Listar clientes");
+        System.out.println("3. Buscar clientes");
+        System.out.println("4. Procesar un pago de repostaje");
+        System.out.println("5. Consultar pagos");
+        System.out.println("0. Salir");
+    }
+
+    private void seleccionarOpcion(int opcion) {
+        switch (opcion) {
+            case 1 -> darAltaCliente();
+            case 2 -> System.out.println("Listando clientes...");
+            case 3 -> System.out.println("Buscando clientes...");
+            case 4 -> System.out.println("Procesando un pago de respotaje...");
+            case 5 -> System.out.println("Consultando pagos...");
+            case 0 -> { }
+            default -> System.out.println("Opción inválida");
+        }
+    }
+
+    private void darAltaCliente() {
+        String nombre = lectorConsola.leerCadena("Nombre: ");
+        String telefono = lectorConsola.leerCadena("Telefono: ");
+        String matricula = lectorConsola.leerCadena("Matricula: ");
+
+        clienteGestor.registrarCliente(nombre, telefono, matricula);
     }
 }
