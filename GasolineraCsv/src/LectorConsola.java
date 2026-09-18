@@ -8,25 +8,39 @@ public class LectorConsola {
     }
 
     public int leerEntero(String mensaje) {
-        int entero = -1;
-        do {
-            System.out.printf(mensaje);
+        String mensajeFormateado = String.format("%s: ", mensaje);
+        while (true) {
+            System.out.print(mensajeFormateado);
             try {
-                entero = Integer.parseInt(scanner.nextLine().trim());
+                return Integer.parseInt(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.println("Formato de numero equivocado");
+                System.out.println("Error: Debe ingresar un número válido.");
             }
-        } while (entero == -1);
-        return entero;
+        }
+    }
+
+    public int leerEnteroEnRango(String mensaje, int valorMin, int valorMax) {
+        String mensajeFormateado = String.format("%s (%d-%d)", mensaje, valorMin, valorMax);
+        while (true) {
+            int entero = leerEntero(mensajeFormateado);
+            if (entero >= valorMin && entero <= valorMax) {
+                return entero;
+            }
+            System.out.printf("Error: Debe introducir un número dentro del rango (%d-%d).%n", valorMin, valorMax);
+        }
     }
 
     public String leerCadena(String mensaje) {
-        String cadena;
-        do {
-            System.out.print(mensaje);
-            cadena = scanner.nextLine();
-        } while (cadena.isEmpty());
-        return cadena;
+        String mensajeFormateado = String.format("%s: ", mensaje);
+        while (true) {
+            System.out.print(mensajeFormateado);
+            String cadena = scanner.nextLine().trim();
+            if (!cadena.isEmpty()) {
+                return cadena;
+            }
+            System.out.println("Error: Debe ingresar una cadena no vacía.");
+
+        }
     }
 
 

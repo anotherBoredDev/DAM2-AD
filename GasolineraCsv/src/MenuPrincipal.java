@@ -14,7 +14,7 @@ public class MenuPrincipal {
 
         do {
             mostrarMenu();
-            opcion = lectorConsola.leerEntero("Opción: ");
+            opcion = lectorConsola.leerEnteroEnRango("Opción", 0, 5);
             seleccionarOpcion(opcion);
         } while (opcion != 0);
     }
@@ -34,7 +34,7 @@ public class MenuPrincipal {
             case 1 -> darAltaCliente();
             case 2 -> System.out.println("Listando clientes...");
             case 3 -> System.out.println("Buscando clientes...");
-            case 4 -> System.out.println("Procesando un pago de respotaje...");
+            case 4 -> System.out.println("Procesando un pago de repostaje...");
             case 5 -> System.out.println("Consultando pagos...");
             case 0 -> { }
             default -> System.out.println("Opción inválida");
@@ -42,9 +42,9 @@ public class MenuPrincipal {
     }
 
     private void darAltaCliente() {
-        String nombre = lectorConsola.leerCadena("Nombre: ");
-        String telefono = lectorConsola.leerCadena("Telefono: ");
-        String matricula = lectorConsola.leerCadena("Matricula: ");
+        String nombre = lectorConsola.leerCadena("Nombre");
+        String telefono = lectorConsola.leerCadena("Teléfono");
+        String matricula = lectorConsola.leerCadena("Matricula");
 
         clienteGestor.registrarCliente(nombre, telefono, matricula);
     }
