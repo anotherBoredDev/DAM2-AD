@@ -6,8 +6,18 @@ public class ClienteGestor {
     }
 
     public void registrarCliente(String nombre, String telefono, String matricula) {
-        System.out.println("Registrando cliente " + nombre + " telefono: " + telefono + " matriucla: " + matricula);
-        Cliente cliente = new Cliente(0, nombre, telefono, matricula);
+        boolean clienteExiste = clienteAlmacenamiento.buscarPorMatricula(matricula) != null;
+
+        if (clienteExiste) {
+            System.out.println("Error: Cliente ya existe.");
+            return;
+        }
+
+        int id = clienteAlmacenamiento.conseguirSiguienteId();
+        Cliente cliente = new Cliente(id, nombre, telefono, matricula);
+
         clienteAlmacenamiento.guardar(cliente);
+
+        System.out.println("Cliente con id " + id + " registrado.");
     }
 }

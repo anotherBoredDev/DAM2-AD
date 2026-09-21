@@ -11,4 +11,19 @@ public class Cliente {
         this.matricula = matricula;
     }
 
+    public int getID() {
+        return ID;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
 }
