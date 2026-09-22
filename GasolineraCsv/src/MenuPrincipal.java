@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MenuPrincipal {
@@ -14,7 +15,6 @@ public class MenuPrincipal {
 
     public void iniciar() {
         int opcion;
-
         do {
             mostrarMenu();
             opcion = lectorConsola.leerEnteroEnRango("Opción", 0, 5);
@@ -61,6 +61,26 @@ public class MenuPrincipal {
 
     private void listarClientes() {
         List<Cliente> listadoClientes = clienteGestor.conseguirTodosClientes();
-        System.out.println(listadoClientes);
+        Collections.sort(listadoClientes);
+
+        int longitudId = 6;
+        int longitudNombre = 15;
+        int longitudTelefono = 15;
+
+        if (listadoClientes.isEmpty()) {
+            System.out.println("No hay ningún cliente registrado.");
+        } else {
+            System.out.println("ID     NOMBRE          TELÉFONO        MATRICULA");
+            for (Cliente c : listadoClientes) {
+                String id = c.getID() + " ".repeat(Math.max(0, longitudId - String.valueOf(c.getID()).length()));
+                String nombre = c.getNombre() + " ".repeat(Math.max(0, longitudNombre - c.getNombre().length()));
+                String telefono = c.getTelefono() + " ".repeat(Math.max(0, longitudTelefono - c.getTelefono().length()));
+                String matricula = c.getMatricula();
+
+                System.out.printf("%s %s %s %s%n", id, nombre, telefono, matricula);
+
+            }
+        }
+
     }
 }

@@ -15,17 +15,6 @@ public class Cliente implements Comparable<Cliente>{
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Cliente cliente)) return false;
-        return ID == cliente.ID && Objects.equals(nombre, cliente.nombre) && Objects.equals(telefono, cliente.telefono) && Objects.equals(matricula, cliente.matricula);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(ID, nombre, telefono, matricula);
-    }
-
-    @Override
     public int compareTo(Cliente o) {
         int comparacion = nombre.compareToIgnoreCase(o.getNombre());
         if (comparacion == 0) {

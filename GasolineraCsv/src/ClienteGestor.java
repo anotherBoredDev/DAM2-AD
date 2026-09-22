@@ -5,9 +5,9 @@ public class ClienteGestor {
     private final Almacenamiento<Cliente> clienteAlmacenamiento;
     private final List<Cliente> clientesEnMemoria;
 
-    public ClienteGestor() {
-        this.clienteAlmacenamiento = new ClienteCsvAlmacenamiento();
-        clientesEnMemoria = cargarClientesEnMemoria();
+    public ClienteGestor(Almacenamiento<Cliente> clienteAlmacenamiento) {
+        this.clienteAlmacenamiento = clienteAlmacenamiento;
+        this.clientesEnMemoria = cargarClientesEnMemoria();
     }
 
     private List<Cliente> cargarClientesEnMemoria() {
