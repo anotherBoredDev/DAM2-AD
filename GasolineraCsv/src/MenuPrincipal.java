@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class MenuPrincipal {
     private final ClienteGestor clienteGestor;
     private final PagoGestor pagoGestor;
@@ -32,7 +35,7 @@ public class MenuPrincipal {
     private void seleccionarOpcion(int opcion) {
         switch (opcion) {
             case 1 -> darAltaCliente();
-            case 2 -> System.out.println("Listando clientes...");
+            case 2 -> listarClientes();
             case 3 -> System.out.println("Buscando clientes...");
             case 4 -> System.out.println("Procesando un pago de repostaje...");
             case 5 -> System.out.println("Consultando pagos...");
@@ -46,6 +49,18 @@ public class MenuPrincipal {
         String telefono = lectorConsola.leerCadena("Teléfono");
         String matricula = lectorConsola.leerCadena("Matricula");
 
-        clienteGestor.registrarCliente(nombre, telefono, matricula);
+        Cliente clienteRegistrado = clienteGestor.registrarCliente(nombre, telefono, matricula);
+
+        if (clienteRegistrado == null) {
+            System.out.println("Error: Cliente no se ha podido registrar.");
+        } else {
+            String mensaje = String.format("Cliente con id %d ha sido registrado correctamente.", clienteRegistrado.getID());
+            System.out.println(mensaje);
+        }
+    }
+
+    private void listarClientes() {
+        List<Cliente> listadoClientes = clienteGestor.conseguirTodosClientes();
+        System.out.println(listadoClientes);
     }
 }

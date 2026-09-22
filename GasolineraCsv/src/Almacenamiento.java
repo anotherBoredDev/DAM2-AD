@@ -1,7 +1,7 @@
+import java.util.Collection;
 import java.util.List;
 
-public interface Almacenamiento<T, ID> {
+public interface Almacenamiento<T> {
     void guardar(T entidad);
-    List<T> obtenerTodos();
-    T buscarPorId(ID id);
+    Collection<T> obtenerTodos();
 }
