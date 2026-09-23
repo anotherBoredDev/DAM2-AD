@@ -17,7 +17,7 @@ public class ClienteGestor {
 
     public Cliente registrarCliente(String nombre, String telefono, String matricula) {
         matricula = matricula.toUpperCase(Locale.ROOT);
-        boolean clienteExiste = buscarPorMatricula(matricula) != null;
+        boolean clienteExiste = existeClientePorMatricula(matricula);
 
         if (clienteExiste) {
             return null;
@@ -60,13 +60,22 @@ public class ClienteGestor {
         return id + 1;
     }
 
-    private Cliente buscarPorMatricula(String matricula) {
+    public boolean existeClientePorId(int id) {
         for (Cliente c : clientesEnMemoria) {
-            if (c.getMatricula().equals(matricula)) {
-                return c;
+            if (c.getID() == id) {
+                return true;
             }
         }
-        return null;
+        return false;
+    }
+
+    private boolean existeClientePorMatricula(String matricula) {
+        for (Cliente c : clientesEnMemoria) {
+            if (c.getMatricula().equals(matricula)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

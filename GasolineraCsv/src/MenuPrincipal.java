@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class MenuPrincipal {
             case 1 -> darAltaCliente();
             case 2 -> listarTodosClientes();
             case 3 -> buscarCliente();
-            case 4 -> System.out.println("Procesando un pago de repostaje...");
+            case 4 -> procesarPago();
             case 5 -> System.out.println("Consultando pagos...");
             case 0 -> { }
             default -> System.out.println("Opción inválida");
@@ -107,5 +108,39 @@ public class MenuPrincipal {
             imprimirListadoClientes(coincidencias);
         }
         imprimirSeparador();
+    }
+
+    private void procesarPago() {
+        if (clienteGestor.conseguirTodosClientes().isEmpty()) {
+            System.out.println("No hay clientes registrados.");
+            return;
+        }
+
+        listarTodosClientes();
+        int id = lectorConsola.leerEntero("Introduzca el id del cliente");
+
+        if (!clienteGestor.existeClientePorId(id)) {
+            System.out.println("El cliente con el id introducido no existe.");
+            return;
+        }
+
+        LocalDate fecha = lectorConsola.leerFecha("Introduzca la fecha del pago");
+        float importe = lectorConsola.leerDecimal("Introduzca el importe", 2);
+        int litros = lectorConsola.leerEntero("Introduzca los litros");
+        String combustible;
+
+        System.out.println("Tipos de combustible:");
+        System.out.println("1. Gasolina 95");
+        System.out.println("2. Diésel");
+        int indiceCombustible = lectorConsola.leerEnteroEnRango("Introduzca el tipo de combustible", 1, 2);
+
+        if (indiceCombustible == 1) {
+            combustible = "Gasolina 95";
+        } else if (indiceCombustible == 2 ){
+            combustible = "Diésel";
+        }
+
+
+
     }
 }
