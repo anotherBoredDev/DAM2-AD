@@ -138,9 +138,10 @@ public class MenuPrincipal {
             combustible = "Gasolina 95";
         } else if (indiceCombustible == 2 ){
             combustible = "Diésel";
+        } else {
+            combustible = "Desconocido";
         }
 
-
-
+        pagoGestor.registrarPago(id, fecha, importe, litros, combustible);
     }
 }
