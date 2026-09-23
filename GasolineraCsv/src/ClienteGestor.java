@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ClienteGestor {
     private final Almacenamiento<Cliente> clienteAlmacenamiento;
@@ -15,6 +16,7 @@ public class ClienteGestor {
     }
 
     public Cliente registrarCliente(String nombre, String telefono, String matricula) {
+        matricula = matricula.toUpperCase(Locale.ROOT);
         boolean clienteExiste = buscarPorMatricula(matricula) != null;
 
         if (clienteExiste) {
@@ -30,14 +32,32 @@ public class ClienteGestor {
         return cliente;
     }
 
-    private int conseguirSiguienteId() {
-        int id = 1;
+    public List<Cliente> conseguirTodosClientes() {
+        return clientesEnMemoria;
+    }
+
+    public List<Cliente> buscarClienteCualquierCoincidencia(String busqueda) {
+        List<Cliente> coincidencias = new ArrayList<>();
+        busqueda = busqueda.toUpperCase(Locale.ROOT);
+
         for (Cliente c : clientesEnMemoria) {
-            if (c.getID() > id) {
+            boolean encontrado = c.getNombre().toUpperCase(Locale.ROOT).contains(busqueda) || c.getTelefono().toUpperCase(Locale.ROOT).contains(busqueda) || c.getMatricula().toUpperCase(Locale.ROOT).contains(busqueda);
+            if (encontrado) {
+                coincidencias.add(c);
+            }
+        }
+
+        return coincidencias;
+    }
+
+    private int conseguirSiguienteId() {
+        int id = 0;
+        for (Cliente c : clientesEnMemoria) {
+            if (c.getID() >= id) {
                 id = c.getID();
             }
         }
-        return id;
+        return id + 1;
     }
 
     private Cliente buscarPorMatricula(String matricula) {
@@ -49,7 +69,5 @@ public class ClienteGestor {
         return null;
     }
 
-    public List<Cliente> conseguirTodosClientes() {
-        return clientesEnMemoria;
-    }
+
 }

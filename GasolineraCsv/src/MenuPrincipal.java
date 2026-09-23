@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,11 +31,34 @@ public class MenuPrincipal {
         System.out.println("0. Salir");
     }
 
+    private void imprimirSeparador() {
+        System.out.println("-".repeat(20));
+    }
+
+    private void imprimirListadoClientes(List<Cliente> listadoClientes) {
+        Collections.sort(listadoClientes);
+
+        int longitudId = 6;
+        int longitudNombre = 15;
+        int longitudTelefono = 15;
+
+        System.out.println("ID     NOMBRE          TELÉFONO        MATRICULA");
+        for (Cliente c : listadoClientes) {
+            String id = c.getID() + " ".repeat(Math.max(0, longitudId - String.valueOf(c.getID()).length()));
+            String nombre = c.getNombre() + " ".repeat(Math.max(0, longitudNombre - c.getNombre().length()));
+            String telefono = c.getTelefono() + " ".repeat(Math.max(0, longitudTelefono - c.getTelefono().length()));
+            String matricula = c.getMatricula();
+
+            System.out.printf("%s %s %s %s%n", id, nombre, telefono, matricula);
+        }
+
+    }
+
     private void seleccionarOpcion(int opcion) {
         switch (opcion) {
             case 1 -> darAltaCliente();
-            case 2 -> listarClientes();
-            case 3 -> System.out.println("Buscando clientes...");
+            case 2 -> listarTodosClientes();
+            case 3 -> buscarCliente();
             case 4 -> System.out.println("Procesando un pago de repostaje...");
             case 5 -> System.out.println("Consultando pagos...");
             case 0 -> { }
@@ -51,36 +73,39 @@ public class MenuPrincipal {
 
         Cliente clienteRegistrado = clienteGestor.registrarCliente(nombre, telefono, matricula);
 
+        imprimirSeparador();
         if (clienteRegistrado == null) {
             System.out.println("Error: Cliente no se ha podido registrar.");
         } else {
             String mensaje = String.format("Cliente con id %d ha sido registrado correctamente.", clienteRegistrado.getID());
             System.out.println(mensaje);
         }
+        imprimirSeparador();
     }
 
-    private void listarClientes() {
+    private void listarTodosClientes() {
         List<Cliente> listadoClientes = clienteGestor.conseguirTodosClientes();
-        Collections.sort(listadoClientes);
 
-        int longitudId = 6;
-        int longitudNombre = 15;
-        int longitudTelefono = 15;
-
+        imprimirSeparador();
         if (listadoClientes.isEmpty()) {
             System.out.println("No hay ningún cliente registrado.");
         } else {
-            System.out.println("ID     NOMBRE          TELÉFONO        MATRICULA");
-            for (Cliente c : listadoClientes) {
-                String id = c.getID() + " ".repeat(Math.max(0, longitudId - String.valueOf(c.getID()).length()));
-                String nombre = c.getNombre() + " ".repeat(Math.max(0, longitudNombre - c.getNombre().length()));
-                String telefono = c.getTelefono() + " ".repeat(Math.max(0, longitudTelefono - c.getTelefono().length()));
-                String matricula = c.getMatricula();
-
-                System.out.printf("%s %s %s %s%n", id, nombre, telefono, matricula);
-
-            }
+            imprimirListadoClientes(listadoClientes);
         }
+        imprimirSeparador();
 
+    }
+
+    private void buscarCliente() {
+        String busqueda = lectorConsola.leerCadena("Texto que buscar");
+        List<Cliente> coincidencias = clienteGestor.buscarClienteCualquierCoincidencia(busqueda);
+
+        imprimirSeparador();
+        if (coincidencias.isEmpty()) {
+            System.out.println("No hay ningún cliente que coincida con la búsqueda '" + busqueda + "'.");
+        } else {
+            imprimirListadoClientes(coincidencias);
+        }
+        imprimirSeparador();
     }
 }
