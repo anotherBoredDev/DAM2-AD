@@ -63,6 +63,7 @@ public class LectorConsola {
     public LocalDate leerFecha(String mensaje) {
         String mensajeFormateado = String.format("%s (dd/MM/aaaa): ", mensaje);
         while (true) {
+            System.out.print(mensajeFormateado);
             String fechaCadena = scanner.nextLine().trim();
             if (fechaCadena.isEmpty()) {
                 return LocalDate.now();
