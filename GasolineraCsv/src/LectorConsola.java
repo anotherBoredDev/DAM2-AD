@@ -33,17 +33,34 @@ public class LectorConsola {
         }
     }
 
+    public float leerDecimal(String mensaje) {
+        String mensajeFormateado = String.format("%s", mensaje);
+        while (true) {
+            String numero = leerCadena(mensajeFormateado);
+            numero = numero.replace(',', '.');
+
+            try {
+                return Float.parseFloat(numero);
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Debe ingresar un decimal válido.");
+            }
+        }
+    }
+
     public float leerDecimal(String mensaje, int decimales) {
-        String mensajeFormateado = String.format("%s (%d %s): ", mensaje, decimales, (decimales <= 1 ? "decimal" : "decimales"));
+        String mensajeFormateado = String.format("%s (%d %s)", mensaje, decimales, (decimales <= 1 ? "decimal" : "decimales"));
         while (true) {
             String numero = leerCadena(mensajeFormateado);
             numero = numero.replace(',', '.');
 
             int posicionDecimal = numero.indexOf('.');
             if (posicionDecimal > 0 && numero.substring(posicionDecimal + 1).length() == decimales) { // Comprueba que hay decimales y si la cantidad coincide
-                return Float.parseFloat(numero);
+                try {
+                    return Float.parseFloat(numero);
+                } catch (NumberFormatException e) {
+                    System.out.printf("Error: Debe introducir un decimal con %d %s.%n", decimales, (decimales <= 1 ? "decimal" : "decimales"));
+                }
             }
-
             System.out.printf("Error: Debe introducir un decimal con %d %s.%n", decimales, (decimales <= 1 ? "decimal" : "decimales"));
         }
     }
