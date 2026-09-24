@@ -63,7 +63,10 @@ public class LectorConsola {
     public LocalDate leerFecha(String mensaje) {
         String mensajeFormateado = String.format("%s (dd/MM/aaaa): ", mensaje);
         while (true) {
-            String fechaCadena = leerCadena(mensajeFormateado);
+            String fechaCadena = scanner.nextLine().trim();
+            if (fechaCadena.isEmpty()) {
+                return LocalDate.now();
+            }
             try {
                 return LocalDate.parse(fechaCadena, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             } catch (DateTimeParseException e) {
