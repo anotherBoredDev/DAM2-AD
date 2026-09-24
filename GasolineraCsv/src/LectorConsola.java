@@ -40,7 +40,7 @@ public class LectorConsola {
             numero = numero.replace(',', '.');
 
             int posicionDecimal = numero.indexOf('.');
-            if (numero.substring(posicionDecimal).length() <= decimales) {
+            if (posicionDecimal > 0 && numero.substring(posicionDecimal + 1).length() == decimales) { // Comprueba que hay decimales y si la cantidad coincide
                 return Float.parseFloat(numero);
             }
 
