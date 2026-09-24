@@ -36,6 +36,15 @@ public class ClienteGestor {
         return clientesEnMemoria;
     }
 
+    public Cliente buscarClientePorId(int id) {
+        for (Cliente c : clientesEnMemoria) {
+            if (c.getId() == id) {
+                return c;
+            }
+        }
+        return null;
+    }
+
     public List<Cliente> buscarClienteCualquierCoincidencia(String busqueda) {
         List<Cliente> coincidencias = new ArrayList<>();
         busqueda = busqueda.toUpperCase(Locale.ROOT);
@@ -77,6 +86,4 @@ public class ClienteGestor {
         }
         return false;
     }
-
-
 }

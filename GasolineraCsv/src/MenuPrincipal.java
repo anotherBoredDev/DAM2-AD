@@ -117,9 +117,9 @@ public class MenuPrincipal {
         }
 
         listarTodosClientes();
-        int id = lectorConsola.leerEntero("Introduzca el id del cliente");
+        int idCliente = lectorConsola.leerEntero("Introduzca el id del cliente");
 
-        if (!clienteGestor.existeClientePorId(id)) {
+        if (!clienteGestor.existeClientePorId(idCliente)) {
             System.out.println("El cliente con el id introducido no existe.");
             return;
         }
@@ -142,13 +142,16 @@ public class MenuPrincipal {
             combustible = "Desconocido";
         }
 
-        Pago pagoRegistrado = pagoGestor.registrarPago(id, fecha, importe, litros, combustible);
+        Pago pagoRegistrado = pagoGestor.registrarPago(idCliente, fecha, importe, litros, combustible);
 
         imprimirSeparador();
         if (pagoRegistrado == null) {
             System.out.println("Error: El pago no se ha podido procesar");
         } else {
-            String mensaje = String.format("Pago con id %d ha sido registrado correctamente.", pagoRegistrado.getId());
+            String mensaje = String.format("Pago con id %d, a nombre del cliente %s y con un importe de %.2f€ ha sido registrado correctamente.",
+                    pagoRegistrado.getId(),
+                    clienteGestor.buscarClientePorId(idCliente).getNombre(),
+                    pagoRegistrado.getImporte());
             System.out.println(mensaje);
         }
         imprimirSeparador();
