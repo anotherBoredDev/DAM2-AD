@@ -127,7 +127,7 @@ public class MenuPrincipal {
 
         LocalDate fecha = lectorConsola.leerFecha("Introduzca la fecha del pago");
         float importe = lectorConsola.leerDecimal("Introduzca el importe", 2);
-        int litros = lectorConsola.leerEntero("Introduzca los litros");
+        float litros = lectorConsola.leerDecimal("Introduzca los litros");
         String combustible;
 
         System.out.println("Tipos de combustible:");

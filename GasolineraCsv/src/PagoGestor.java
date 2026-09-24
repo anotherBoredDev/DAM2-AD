@@ -15,7 +15,7 @@ public class PagoGestor {
         return new LinkedList<Pago>(pagoAlmacenamiento.obtenerTodos());
      }
 
-     public Pago registrarPago(int idCliente, LocalDate fecha, float importe, int litros, String combustible) {
+     public Pago registrarPago(int idCliente, LocalDate fecha, float importe, float litros, String combustible) {
          int id = conseguirSiguienteId();
 
          Pago pago = new Pago(id, idCliente, fecha, importe, litros, combustible);
