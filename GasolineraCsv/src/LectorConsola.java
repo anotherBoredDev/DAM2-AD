@@ -23,7 +23,7 @@ public class LectorConsola {
     }
 
     public int leerEnteroEnRango(String mensaje, int valorMin, int valorMax) {
-        String mensajeFormateado = String.format("%s (%d-%d):", mensaje, valorMin, valorMax);
+        String mensajeFormateado = String.format("%s (%d-%d)", mensaje, valorMin, valorMax);
         while (true) {
             int entero = leerEntero(mensajeFormateado);
             if (entero >= valorMin && entero <= valorMax) {
