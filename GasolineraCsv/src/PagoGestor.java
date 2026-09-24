@@ -1,6 +1,8 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class PagoGestor {
     private final Almacenamiento<Pago> pagoAlmacenamiento;
@@ -16,6 +18,23 @@ public class PagoGestor {
      }
 
      public Pago registrarPago(int idCliente, LocalDate fecha, float importe, int litros, String combustible) {
-        return null;
+         int id = conseguirSiguienteId();
+
+         Pago pago = new Pago(id, idCliente, fecha, importe, litros, combustible);
+
+         pagoAlmacenamiento.guardar(pago);
+         pagosEnMemoria.add(pago);
+
+         return pago;
      }
+
+    private int conseguirSiguienteId() {
+        int id = 0;
+        for (Pago p : pagosEnMemoria) {
+            if (p.getId() >= id) {
+                id = p.getId();
+            }
+        }
+        return id + 1;
+    }
 }

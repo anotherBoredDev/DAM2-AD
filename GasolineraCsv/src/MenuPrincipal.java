@@ -144,11 +144,13 @@ public class MenuPrincipal {
 
         Pago pagoRegistrado = pagoGestor.registrarPago(id, fecha, importe, litros, combustible);
 
+        imprimirSeparador();
         if (pagoRegistrado == null) {
-            System.out.println("Error: El pago no se ha podido registrar");
+            System.out.println("Error: El pago no se ha podido procesar");
         } else {
-            String mensaje = String.format("Cliente con id %d ha sido registrado correctamente.", pagoRegistrado.getId());
+            String mensaje = String.format("Pago con id %d ha sido registrado correctamente.", pagoRegistrado.getId());
             System.out.println(mensaje);
         }
+        imprimirSeparador();
     }
 }
