@@ -1,14 +1,11 @@
-import java.util.Comparator;
-import java.util.Objects;
-
 public class Cliente implements Comparable<Cliente>{
-    private final int ID;
+    private final int id;
     private String nombre;
     private String telefono;
     private String matricula;
 
-    public Cliente(int ID, String nombre, String telefono, String matricula) {
-        this.ID = ID;
+    public Cliente(int id, String nombre, String telefono, String matricula) {
+        this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
         this.matricula = matricula;
@@ -18,13 +15,13 @@ public class Cliente implements Comparable<Cliente>{
     public int compareTo(Cliente o) {
         int comparacion = nombre.compareToIgnoreCase(o.getNombre());
         if (comparacion == 0) {
-            comparacion = this.ID - o.getID();
+            comparacion = this.id - o.getId();
         }
         return comparacion;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
     public String getNombre() {

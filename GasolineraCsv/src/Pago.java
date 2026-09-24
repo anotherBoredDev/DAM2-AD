@@ -16,4 +16,28 @@ public class Pago {
         this.litros = litros;
         this.combustible = combustible;
     }
+
+    public String getCombustible() {
+        return combustible;
+    }
+
+    public float getLitros() {
+        return litros;
+    }
+
+    public float getImporte() {
+        return importe;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

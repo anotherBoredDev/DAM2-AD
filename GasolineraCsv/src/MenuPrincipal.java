@@ -45,7 +45,7 @@ public class MenuPrincipal {
 
         System.out.println("ID     NOMBRE          TELÉFONO        MATRICULA");
         for (Cliente c : listadoClientes) {
-            String id = c.getID() + " ".repeat(Math.max(0, longitudId - String.valueOf(c.getID()).length()));
+            String id = c.getId() + " ".repeat(Math.max(0, longitudId - String.valueOf(c.getId()).length()));
             String nombre = c.getNombre() + " ".repeat(Math.max(0, longitudNombre - c.getNombre().length()));
             String telefono = c.getTelefono() + " ".repeat(Math.max(0, longitudTelefono - c.getTelefono().length()));
             String matricula = c.getMatricula();
@@ -78,7 +78,7 @@ public class MenuPrincipal {
         if (clienteRegistrado == null) {
             System.out.println("Error: Cliente no se ha podido registrar.");
         } else {
-            String mensaje = String.format("Cliente con id %d ha sido registrado correctamente.", clienteRegistrado.getID());
+            String mensaje = String.format("Cliente con id %d ha sido registrado correctamente.", clienteRegistrado.getId());
             System.out.println(mensaje);
         }
         imprimirSeparador();
@@ -142,6 +142,13 @@ public class MenuPrincipal {
             combustible = "Desconocido";
         }
 
-        pagoGestor.registrarPago(id, fecha, importe, litros, combustible);
+        Pago pagoRegistrado = pagoGestor.registrarPago(id, fecha, importe, litros, combustible);
+
+        if (pagoRegistrado == null) {
+            System.out.println("Error: El pago no se ha podido registrar");
+        } else {
+            String mensaje = String.format("Cliente con id %d ha sido registrado correctamente.", pagoRegistrado.getId());
+            System.out.println(mensaje);
+        }
     }
 }

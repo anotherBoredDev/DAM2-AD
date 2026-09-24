@@ -53,8 +53,8 @@ public class ClienteGestor {
     private int conseguirSiguienteId() {
         int id = 0;
         for (Cliente c : clientesEnMemoria) {
-            if (c.getID() >= id) {
-                id = c.getID();
+            if (c.getId() >= id) {
+                id = c.getId();
             }
         }
         return id + 1;
@@ -62,7 +62,7 @@ public class ClienteGestor {
 
     public boolean existeClientePorId(int id) {
         for (Cliente c : clientesEnMemoria) {
-            if (c.getID() == id) {
+            if (c.getId() == id) {
                 return true;
             }
         }
