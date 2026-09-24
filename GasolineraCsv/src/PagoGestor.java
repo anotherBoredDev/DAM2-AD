@@ -1,8 +1,6 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 public class PagoGestor {
     private final Almacenamiento<Pago> pagoAlmacenamiento;
@@ -36,5 +34,9 @@ public class PagoGestor {
             }
         }
         return id + 1;
+    }
+
+    public List<Pago> conseguirTodosPagos() {
+        return pagosEnMemoria;
     }
 }
