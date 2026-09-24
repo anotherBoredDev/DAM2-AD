@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,7 +54,6 @@ public class MenuPrincipal {
 
             System.out.printf("%s %s %s %s%n", id, nombre, telefono, matricula);
         }
-
     }
 
     private void seleccionarOpcion(int opcion) {
@@ -61,7 +62,7 @@ public class MenuPrincipal {
             case 2 -> listarTodosClientes();
             case 3 -> buscarCliente();
             case 4 -> procesarPago();
-            case 5 -> System.out.println("Consultando pagos...");
+            case 5 -> consultarPagos();
             case 0 -> { }
             default -> System.out.println("Opción inválida");
         }
@@ -153,6 +154,31 @@ public class MenuPrincipal {
                     clienteGestor.buscarClientePorId(idCliente).getNombre(),
                     pagoRegistrado.getImporte());
             System.out.println(mensaje);
+        }
+        imprimirSeparador();
+    }
+
+    private void consultarPagos() {
+        List<Pago> listadoPagos = new ArrayList<>(pagoGestor.conseguirTodosPagos());
+        Collections.sort(listadoPagos);
+
+        int longitudId = 6;
+        int longitudIdCliente = 12;
+        int longitudFecha = 12;
+        int longitudImporte = 8;
+        int longitudLitros = 10;
+
+        imprimirSeparador();
+        System.out.println("ID     ID CLIENTE   FECHA        IMPORTE    LITROS     COMBUSTIBLE");
+        for (Pago p : listadoPagos) {
+            String id = p.getId() + " ".repeat(Math.max(0, longitudId - String.valueOf(p.getId()).length()));
+            String idCliente = p.getIdCliente() + " ".repeat(Math.max(0, longitudIdCliente - String.valueOf(p.getIdCliente()).length()));
+            String fecha = p.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " ".repeat(Math.max(0, longitudFecha - p.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).length()));
+            String importe = String.format("%.2f", p.getImporte()) + " ".repeat(Math.max(0, longitudImporte - String.valueOf(p.getImporte()).length()));
+            String litros = p.getLitros() + " ".repeat(Math.max(0, longitudLitros - String.valueOf(p.getLitros()).length()));
+            String combustible = p.getCombustible();
+
+            System.out.printf("%s %s %s %s %s %s%n", id, idCliente, fecha, importe, litros, combustible);
         }
         imprimirSeparador();
     }
