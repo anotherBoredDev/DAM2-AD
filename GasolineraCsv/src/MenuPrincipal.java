@@ -165,7 +165,7 @@ public class MenuPrincipal {
         int longitudId = 6;
         int longitudIdCliente = 12;
         int longitudFecha = 12;
-        int longitudImporte = 8;
+        int longitudImporte = 10;
         int longitudLitros = 10;
 
         imprimirSeparador();
@@ -174,7 +174,7 @@ public class MenuPrincipal {
             String id = p.getId() + " ".repeat(Math.max(0, longitudId - String.valueOf(p.getId()).length()));
             String idCliente = p.getIdCliente() + " ".repeat(Math.max(0, longitudIdCliente - String.valueOf(p.getIdCliente()).length()));
             String fecha = p.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " ".repeat(Math.max(0, longitudFecha - p.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).length()));
-            String importe = String.format("%.2f", p.getImporte()) + " ".repeat(Math.max(0, longitudImporte - String.valueOf(p.getImporte()).length()));
+            String importe = String.format("%.2f", p.getImporte()) + " ".repeat(Math.max(0, longitudImporte - String.format("%.2f", p.getImporte()).length()));
             String litros = p.getLitros() + " ".repeat(Math.max(0, longitudLitros - String.valueOf(p.getLitros()).length()));
             String combustible = p.getCombustible();
 
