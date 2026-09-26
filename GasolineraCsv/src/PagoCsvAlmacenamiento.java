@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
     private final Path directorio;
@@ -46,7 +45,7 @@ public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
             }
 
         } catch (IOException e) {
-            System.out.println("Holi esto no va :c (leer fichero pagos)");
+            System.out.println("Se ha producido un error al leer los datos de " + fichero);
         }
 
         return pagos;

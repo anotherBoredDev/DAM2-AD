@@ -3,9 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
     private final Path directorio;
@@ -43,7 +41,7 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
             }
 
         } catch (IOException e) {
-            System.out.println("Holi esto no va :c (leer fichero clientes)");
+            System.out.println("Se ha producido un error al leer los datos de " + fichero);
         }
 
         return clientes;
