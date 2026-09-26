@@ -1,11 +1,15 @@
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
 
 public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
     private final Path directorio;
@@ -14,11 +18,45 @@ public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
     public PagoCsvAlmacenamiento() {
         this.directorio = Path.of("datos");
         this.fichero = directorio.resolve("pagos.csv");
+        prepararAlmacenamiento();
+    }
+
+    private void prepararAlmacenamiento() {
+        try {
+            if (Files.notExists(directorio)) {
+                Files.createDirectory(directorio);
+            }
+
+            if (Files.notExists(fichero)) {
+                String cabecera = "id,idCliente,fecha,importe,litros,combustible;" + System.lineSeparator();
+                Files.writeString(fichero, cabecera, StandardCharsets.UTF_8, CREATE);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error al preparar la ruta " + directorio);
+        }
     }
 
     @Override
     public void guardar(Pago entidad) {
-        // guardar
+        try {
+            String registro = String.format("%d,%d,%s,%.2f,%f,%s;",
+                    entidad.getId(),
+                    entidad.getIdCliente(),
+                    entidad.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                    entidad.getImporte(),
+                    entidad.getLitros(),
+                    entidad.getCombustible()
+            ) + System.lineSeparator();
+
+            Files.writeString(fichero, registro ,
+                    StandardCharsets.UTF_8,
+                    APPEND
+            );
+
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error al guardar un pago en " + fichero + ". Id pago " + entidad.getId());
+        }
     }
 
     @Override
