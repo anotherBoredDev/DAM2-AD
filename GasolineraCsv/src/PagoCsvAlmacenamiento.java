@@ -65,11 +65,21 @@ public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
         Collection<Pago> pagos = new ArrayList<>();
 
         try (BufferedReader reader = Files.newBufferedReader(fichero)) {
-            String linea = reader.readLine(); // lee el header del archivo csv y evita que lo consuma el bucle
+            String linea = reader.readLine(); // lee el header del archivo csv
+            int cantidadCampos =  linea.split(",").length; // guarda la cantidad de campos de un registro correcto
+
+            int lineaActual = 1;
 
             while ((linea = reader.readLine()) != null) {
+                lineaActual++;
+
                 linea = linea.substring(0, linea.indexOf(";")); // Busca el último carácter de la línea (;) y lo elimina, incluyendo lo posterior
                 String[] atributosPago = linea.split(",");
+
+                if (atributosPago.length != cantidadCampos) {
+                    System.err.println("Registro corrupto en " + fichero + " en linea " + lineaActual);
+                    continue;
+                }
 
                 Pago p = new Pago(
                         Integer.parseInt(atributosPago[0]),
