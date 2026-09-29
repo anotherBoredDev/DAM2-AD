@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Locale;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -40,7 +41,7 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
     @Override
     public void guardar(Cliente entidad) {
         try {
-            String registro = String.format("%d,%s,%s,%s;",
+            String registro = String.format(Locale.ROOT, "%d,%s,%s,%s;",
                     entidad.getId(),
                     entidad.getNombre(),
                     entidad.getTelefono(),

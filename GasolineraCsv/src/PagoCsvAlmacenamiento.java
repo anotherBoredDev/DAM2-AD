@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -40,7 +41,7 @@ public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
     @Override
     public void guardar(Pago entidad) {
         try {
-            String registro = String.format("%d,%d,%s,%.2f,%f,%s;",
+            String registro = String.format(Locale.ROOT, "%d,%d,%s,%.2f,%f,%s;",
                     entidad.getId(),
                     entidad.getIdCliente(),
                     entidad.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
