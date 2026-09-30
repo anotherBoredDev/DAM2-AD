@@ -1,0 +1,5 @@
+id,idCliente,fecha,importe,litros,combustible;
+1,1,07/09/2026,25.05,8.2,Gasolina 95;
+2,2,29/09/2026,5000.00,2.280000,Gasolina 95;
+3,2,29/09/2026,2.00,50.000000,Gasolina 95;
+4,1,03/03/2026,12.23,20.000000,Diésel;
