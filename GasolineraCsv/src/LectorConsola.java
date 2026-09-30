@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class LectorConsola {
     private final Scanner scanner;
 
-    public LectorConsola() {
-        this.scanner = new Scanner(System.in);
+    public LectorConsola(Scanner scanner) {
+        this.scanner = scanner;
     }
 
     public int leerEntero(String mensaje) {

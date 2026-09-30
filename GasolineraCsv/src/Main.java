@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Almacenamiento<Cliente> clienteAlmacenamiento = new ClienteCsvAlmacenamiento();
@@ -5,10 +7,12 @@ public class Main {
 
         ClienteGestor clienteGestor = new ClienteGestor(clienteAlmacenamiento);
         PagoGestor pagoGestor = new PagoGestor(pagoAlmacenamiento);
-        LectorConsola lectorConsola = new LectorConsola();
 
-        MenuPrincipal menuPrincipal = new MenuPrincipal(clienteGestor, pagoGestor, lectorConsola);
+        try (Scanner scanner = new Scanner(System.in)){
+            LectorConsola lectorConsola = new LectorConsola(scanner);
 
-        menuPrincipal.iniciar();
+            MenuPrincipal menuPrincipal = new MenuPrincipal(clienteGestor, pagoGestor, lectorConsola);
+            menuPrincipal.iniciar();
+        }
     }
 }
