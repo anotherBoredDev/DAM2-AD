@@ -42,10 +42,10 @@ public class MenuPrincipal {
         Collections.sort(listadoClientes);
 
         int longitudId = 6;
-        int longitudNombre = 15;
+        int longitudNombre = 20;
         int longitudTelefono = 15;
 
-        System.out.println("ID     NOMBRE          TELÉFONO        MATRICULA");
+        System.out.println("ID     NOMBRE               TELÉFONO        MATRICULA");
         for (Cliente c : listadoClientes) {
             String id = c.getId() + " ".repeat(Math.max(0, longitudId - String.valueOf(c.getId()).length()));
             String nombre = c.getNombre() + " ".repeat(Math.max(0, longitudNombre - c.getNombre().length()));
