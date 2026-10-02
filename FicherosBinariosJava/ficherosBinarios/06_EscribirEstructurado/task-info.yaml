@@ -1,0 +1,22 @@
+type: edu
+custom_name: 6. Escribir datos estructurados
+files:
+  - name: src/Main.java
+    visible: true
+    placeholders:
+      - offset: 461
+        length: 55
+        placeholder_text: "// TODO: escribir los seis campos, en el orden acordado"
+        initial_state:
+          length: 55
+          offset: 461
+        initialized_from_dependency: false
+        encrypted_possible_answer: HdyIeG34tVJrTdSYSU9kPoGql1Qgrp4+wzJXGyEyI/KM4PoP2Y4/btP31R0mNGCy/CoLEPuS/MzcN7VRxbYTRqZv8FnRO//KZFFm2vWolup/r8x8yYb41Iwfab2aSBNqOTDIv5OZHpEK6ZdQmEzrf10TIo9Z1MZY4NqrqydwkK4tVHDXPtipQJQtL4ZqRov0RwmgJQMpQAUxGm5QLAaCp8Dch2MuOJG+3QpKC2ja7WhfqvXEmvYAeu9zEgCNr5/IC2fFYmIMULK8QFmp1RTWqcYvKmLL51m1BDLB/uLcNSk4p9gEL/qiAXVb7hJmiiIGNj2l6w5uzd9cx8lPlQGGB8j8vVS+/IA0twW55qcVU4U=
+        selected: false
+        status: Unchecked
+    learner_created: false
+  - name: test/Tests.java
+    visible: false
+    learner_created: false
+status: Unchecked
+record: -1

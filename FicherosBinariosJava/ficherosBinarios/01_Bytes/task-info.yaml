@@ -1,0 +1,22 @@
+type: edu
+custom_name: 1. Qué es un byte
+files:
+  - name: src/Main.java
+    visible: true
+    placeholders:
+      - offset: 79
+        length: 40
+        placeholder_text: "0 /* TODO: interpretar dato sin signo */"
+        initial_state:
+          length: 40
+          offset: 79
+        initialized_from_dependency: false
+        encrypted_possible_answer: jpS5/HpHvGJkKT9I0kVq5R2/M0o5u+fl/ov+yVO0Y58=
+        selected: true
+        status: Unchecked
+    learner_created: false
+  - name: test/Tests.java
+    visible: false
+    learner_created: false
+status: Unchecked
+record: -1

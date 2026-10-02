@@ -1,0 +1,101 @@
+type: edu
+custom_name: "8. Proyecto final: modificar un BMP"
+files:
+  - name: src/Main.java
+    visible: true
+    placeholders:
+      - offset: 394
+        length: 32
+        placeholder_text: "false /* TODO A: comprobar BM */"
+        initial_state:
+          length: 32
+          offset: 394
+        initialized_from_dependency: false
+        encrypted_possible_answer: Z9HEkUGyndkQ8cggFFgMKGprj9mRUYyp+t8zEJgoebUGzHFPD7UAP5I8gsiU9jsU
+        selected: false
+        status: Unchecked
+      - offset: 777
+        length: 44
+        placeholder_text: "ByteOrder.BIG_ENDIAN /* TODO B: orden BMP */"
+        initial_state:
+          length: 44
+          offset: 777
+        initialized_from_dependency: false
+        encrypted_possible_answer: rVjRHjYXealV86a63pjDzUQ4/9Hb5Qki0DFPJUX6oSs=
+        selected: false
+        status: Unchecked
+      - offset: 854
+        length: 182
+        placeholder_text: |-
+          0; // TODO B: leer comienzo de píxeles
+                  int ancho = 0; // TODO B
+                  int alto = 0; // TODO B
+                  int bitsPorPixel = 0; // TODO B
+                  int compresion = -1; // TODO B
+        initial_state:
+          length: 182
+          offset: 854
+        initialized_from_dependency: false
+        encrypted_possible_answer: HFvOSVklmWsTHrssdgZpcVAoN1kbkNack72KKis/0pRq7pRlGkluMJrdCmfEmse/YV6GT0XFEbAY87rQXsyF6EHZpdA8H0cgdYI3mzLSsKc52rZjHZeFi4YZJXyHvx0bC7c/5B9U5MRoxnTiCzqYZLp6bClYoDbNyxcMwNhKmz3MnBi83A0HB/UQIIprPV6chkYIHFreDW+/4aWgMrf5o1oxuIyEtYvzYHcUdJJoAeBtkF/H2mLKVWmgJAOIh0xE9pUfVn5ZmLPlR+DgcC7fK7RBi+x8xptQ65Ia11Hv4yk=
+        selected: false
+        status: Unchecked
+      - offset: 2637
+        length: 39
+        placeholder_text: "0L /* TODO C: alinear fila a 4 bytes */"
+        initial_state:
+          length: 39
+          offset: 2637
+        initialized_from_dependency: false
+        encrypted_possible_answer: j6gY+bdF7csvGXHMgHHOKb702vFDZgRe6uAj58CW9Xc=
+        selected: false
+        status: Unchecked
+      - offset: 2706
+        length: 32
+        placeholder_text: "0 /* TODO C: orientar la fila */"
+        initial_state:
+          length: 32
+          offset: 2706
+        initialized_from_dependency: false
+        encrypted_possible_answer: n/x+L2SMJrPjxUK2l3GBPPEc9FPC3VV1LIPWnKggSwyZhJ9Ex1DOxY/DN+9Wo14D
+        selected: false
+        status: Unchecked
+      - offset: 2755
+        length: 33
+        placeholder_text: "0 /* TODO C: posición absoluta */"
+        initial_state:
+          length: 33
+          offset: 2755
+        initialized_from_dependency: false
+        encrypted_possible_answer: 7gLhknh7wA29Zv/no9xRSbQK7iCcRwQLDaTEec/3YCkBZlBY+3sfMgFYve7Y0/9UnyRXzymIEQgh3Trzk/XlOQ40/Hhjihs7EjtuMnT2W3A=
+        selected: false
+        status: Unchecked
+      - offset: 3244
+        length: 53
+        placeholder_text: "// TODO D: escribir los tres componentes en orden BGR"
+        initial_state:
+          length: 53
+          offset: 3244
+        initialized_from_dependency: false
+        encrypted_possible_answer: TOWpG3dEvVEvbI8DTv3YlwZ9tkd4r/nMkKvnyDviO/iT4RyiWqgPs6WgsK4nATpsQVHYckvAF4IiCqUjEMdgs3d8XE7y1DDp9056xn3lqQxQ82BTuxFvjB8UBC6pd6/xs5wQllj4J4eXeURyTq8AbQ==
+        selected: false
+        status: Unchecked
+      - offset: 3972
+        length: 40
+        placeholder_text: "// TODO E: guardar los bytes modificados"
+        initial_state:
+          length: 40
+          offset: 3972
+        initialized_from_dependency: false
+        encrypted_possible_answer: grx61ZuxUWzj13EOte6VVpolZpH/mbK0Sa9HHQSvCY8=
+        selected: false
+        status: Unchecked
+    learner_created: false
+  - name: test/Tests.java
+    visible: false
+    learner_created: false
+  - name: imagen.bmp
+    visible: true
+    is_binary: true
+    learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,10 @@
+custom_name: Ficheros binarios con Java
+content:
+  - 01_Bytes
+  - 02_InterpretarBytes
+  - 03_Escribir
+  - 04_Leer
+  - 05_TextoYBytes
+  - 06_EscribirEstructurado
+  - 07_LeerEstructurado
+  - 08_ModificarBMP

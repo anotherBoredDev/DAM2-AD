@@ -1,0 +1,42 @@
+type: edu
+custom_name: "2. Un byte, tres interpretaciones"
+files:
+  - name: src/Main.java
+    visible: true
+    placeholders:
+      - offset: 154
+        length: 37
+        placeholder_text: "\"\" /* TODO: decodificar como ASCII */"
+        initial_state:
+          length: 37
+          offset: 154
+        initialized_from_dependency: false
+        encrypted_possible_answer: jGFPmdQJDe9jkljjHe4LWhsJZeDsRUxytMJtyeK+bWae9GdFZDnVOZvDJI6WhIyX
+        selected: false
+        status: Unchecked
+      - offset: 385
+        length: 39
+        placeholder_text: "0 /* TODO: copiar el valor con signo */"
+        initial_state:
+          length: 39
+          offset: 385
+        initialized_from_dependency: false
+        encrypted_possible_answer: wYAIr+MeleDmxZJvM3giWg==
+        selected: false
+        status: Unchecked
+      - offset: 654
+        length: 43
+        placeholder_text: "0 /* TODO: convertir este byte sin signo */"
+        initial_state:
+          length: 43
+          offset: 654
+        initialized_from_dependency: false
+        encrypted_possible_answer: jpS5/HpHvGJkKT9I0kVq5QFF5VhY+2P54sD1qmnltLU=
+        selected: false
+        status: Unchecked
+    learner_created: false
+  - name: test/Tests.java
+    visible: false
+    learner_created: false
+status: Unchecked
+record: -1

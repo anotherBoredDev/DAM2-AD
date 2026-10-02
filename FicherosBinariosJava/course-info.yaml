@@ -1,0 +1,19 @@
+type: marketplace
+title: Ficheros binarios con Java
+language: Spanish
+summary: "Aprende a interpretar, escribir y leer bytes hasta modificar un BMP. Acceso\
+  \ a Datos, 2.º DAM."
+programming_language: Java
+content:
+  - ficherosBinarios
+additional_files:
+  - name: build.gradle.kts
+  - name: settings.gradle.kts
+  - name: gradle.properties
+  - name: gradle/wrapper/gradle-wrapper.properties
+  - name: LICENSE-template
+mode: Study
+environment_settings:
+  jvm_language_level: JDK_21
+  gradle_version: 9.8.0
+yaml_version: 6

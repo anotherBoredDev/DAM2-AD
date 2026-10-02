@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="delegatedBuild" value="false" />
+        <option name="distributionType" value="WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ficherosBinarios/01_Bytes" />
+            <option value="$PROJECT_DIR$/ficherosBinarios/02_InterpretarBytes" />
+            <option value="$PROJECT_DIR$/ficherosBinarios/03_Escribir" />
+            <option value="$PROJECT_DIR$/ficherosBinarios/04_Leer" />
+            <option value="$PROJECT_DIR$/ficherosBinarios/05_TextoYBytes" />
+            <option value="$PROJECT_DIR$/ficherosBinarios/06_EscribirEstructurado" />
+            <option value="$PROJECT_DIR$/ficherosBinarios/07_LeerEstructurado" />
+            <option value="$PROJECT_DIR$/ficherosBinarios/08_ModificarBMP" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

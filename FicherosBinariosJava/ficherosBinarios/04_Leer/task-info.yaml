@@ -1,0 +1,26 @@
+type: edu
+custom_name: 4. Leer sin modificar
+files:
+  - name: src/Main.java
+    visible: true
+    placeholders:
+      - offset: 206
+        length: 33
+        placeholder_text: "new byte[0] /* TODO: leer ruta */"
+        initial_state:
+          length: 33
+          offset: 206
+        initialized_from_dependency: false
+        encrypted_possible_answer: wZBjMAjzyDSnNkxWiI/nwy78+XpHR24gC08eqGIBKEA=
+        selected: false
+        status: Unchecked
+    learner_created: false
+  - name: test/Tests.java
+    visible: false
+    learner_created: false
+  - name: datos.bin
+    visible: true
+    is_binary: true
+    learner_created: false
+status: Unchecked
+record: -1

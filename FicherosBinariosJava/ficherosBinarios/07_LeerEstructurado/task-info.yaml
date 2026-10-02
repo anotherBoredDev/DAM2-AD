@@ -1,0 +1,76 @@
+type: edu
+custom_name: 7. Recuperar datos estructurados
+files:
+  - name: src/Main.java
+    visible: true
+    placeholders:
+      - offset: 448
+        length: 21
+        placeholder_text: "0 /* TODO: leer id */"
+        initial_state:
+          length: 21
+          offset: 448
+        initialized_from_dependency: false
+        encrypted_possible_answer: 2OfyRf7yw8A3k0gOx+8q5g==
+        selected: false
+        status: Unchecked
+      - offset: 499
+        length: 26
+        placeholder_text: "\"\" /* TODO: leer nombre */"
+        initial_state:
+          length: 26
+          offset: 499
+        initialized_from_dependency: false
+        encrypted_possible_answer: HceVrP07nf/jkarkz8821Q==
+        selected: false
+        status: Unchecked
+      - offset: 557
+        length: 28
+        placeholder_text: "\"\" /* TODO: leer teléfono */"
+        initial_state:
+          length: 28
+          offset: 557
+        initialized_from_dependency: false
+        encrypted_possible_answer: HceVrP07nf/jkarkz8821Q==
+        selected: false
+        status: Unchecked
+      - offset: 618
+        length: 29
+        placeholder_text: "\"\" /* TODO: leer matrícula */"
+        initial_state:
+          length: 29
+          offset: 618
+        initialized_from_dependency: false
+        encrypted_possible_answer: HceVrP07nf/jkarkz8821Q==
+        selected: false
+        status: Unchecked
+      - offset: 676
+        length: 26
+        placeholder_text: "0.0 /* TODO: leer saldo */"
+        initial_state:
+          length: 26
+          offset: 676
+        initialized_from_dependency: false
+        encrypted_possible_answer: +cPFx6ZWBQ4pZvDzuBJo0Q==
+        selected: false
+        status: Unchecked
+      - offset: 733
+        length: 29
+        placeholder_text: "false /* TODO: leer activo */"
+        initial_state:
+          length: 29
+          offset: 733
+        initialized_from_dependency: false
+        encrypted_possible_answer: 4G5Dl9KDOQlWhZsfqL5l/vxKM94ZhQPPgFdn7ojvujA=
+        selected: false
+        status: Unchecked
+    learner_created: false
+  - name: test/Tests.java
+    visible: false
+    learner_created: false
+  - name: cliente.bin
+    visible: true
+    is_binary: true
+    learner_created: false
+status: Unchecked
+record: -1
