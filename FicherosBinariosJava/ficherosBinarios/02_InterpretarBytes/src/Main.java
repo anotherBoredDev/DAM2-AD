@@ -1,15 +1,14 @@
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class Main {
     public static String comoAscii(byte[] datos) {
-        return "" /* TODO: decodificar como ASCII */;
+        return Byte.toString() /* TODO: decodificar como ASCII */;
     }
 
     public static int[] comoNumerosConSigno(byte[] datos) {
         int[] resultado = new int[datos.length];
         for (int i = 0; i < datos.length; i++) {
-            resultado[i] = 0 /* TODO: copiar el valor con signo */;
+            resultado[i] = datos[i];
         }
         return resultado;
     }
@@ -17,7 +16,7 @@ public class Main {
     public static int[] comoNumerosSinSigno(byte[] datos) {
         int[] resultado = new int[datos.length];
         for (int i = 0; i < datos.length; i++) {
-            resultado[i] = 0 /* TODO: convertir este byte sin signo */;
+            resultado[i] = Byte.toUnsignedInt(datos[i]);
         }
         return resultado;
     }

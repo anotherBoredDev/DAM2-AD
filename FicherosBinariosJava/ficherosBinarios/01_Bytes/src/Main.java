@@ -1,6 +1,6 @@
 public class Main {
     public static int sinSigno(byte dato) {
-        return 0 /* TODO: interpretar dato sin signo */;
+        return Byte.toUnsignedInt(dato);
     }
 
     public static void main(String[] args) {

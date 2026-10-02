@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2808b4e9-5146-4a86-896e-7edb1435a9a4" name="Changes" comment="" />
+    <list default="true" id="2808b4e9-5146-4a86-896e-7edb1435a9a4" name="Changes" comment="Curso de java ficheros binarios">
+      <change beforePath="$PROJECT_DIR$/.gradle/9.8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.8.0/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.8.0/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.8.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.8.0/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.8.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.8.0/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ficherosBinarios/01_Bytes/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ficherosBinarios/01_Bytes/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ficherosBinarios/01_Bytes/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ficherosBinarios/01_Bytes/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ficherosBinarios/02_InterpretarBytes/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ficherosBinarios/02_InterpretarBytes/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ficherosBinarios/02_InterpretarBytes/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ficherosBinarios/02_InterpretarBytes/task-info.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,6 +75,7 @@
     "Application.Main.executor": "Run",
     "Edu.IsLocalCourse": "true",
     "Edu.LearningObjectsStorageType": "SQLite",
+    "Gradle.Tests in 'Ficheros_binarios_con_Java.ficherosBinarios-01_Bytes.test'.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
@@ -103,5 +116,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Curso de java ficheros binarios" />
+    <option name="LAST_COMMIT_MESSAGE" value="Curso de java ficheros binarios" />
   </component>
 </project>

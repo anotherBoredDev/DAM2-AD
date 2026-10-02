@@ -5,7 +5,7 @@ files:
     visible: true
     placeholders:
       - offset: 79
-        length: 40
+        length: 24
         placeholder_text: "0 /* TODO: interpretar dato sin signo */"
         initial_state:
           length: 40
@@ -13,10 +13,13 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: jpS5/HpHvGJkKT9I0kVq5R2/M0o5u+fl/ov+yVO0Y58=
         selected: true
-        status: Unchecked
+        status: Solved
     learner_created: false
   - name: test/Tests.java
     visible: false
     learner_created: false
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 02 Oct 2026 08:04:49 UTC"
 record: -1
