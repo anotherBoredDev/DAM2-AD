@@ -79,23 +79,6 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
         try (BufferedReader reader = Files.newBufferedReader(fichero)) {
             String linea;
 
-            // Comprueba que la estructura de json es válida
-            if ((linea = reader.readLine()) == null) {
-                throw new IOException("El fichero Json que se intenta leer está vacío.");
-            }
-
-            if (!linea.strip().equals("{")) {
-                throw new RuntimeException("Formato del fichero Json inválido.");
-            }
-
-            if ((linea = reader.readLine()) == null) {
-                throw new IOException("El fichero Json que se intenta leer está incompleto.");
-            }
-
-            if (!linea.strip().equals("[")) {
-                throw new RuntimeException("Formato del fichero Json inválido.");
-            }
-
             while ((linea = reader.readLine()) != null) {
                 boolean ultimoResgistro = false;
                 linea = linea.strip();
@@ -104,7 +87,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
                     ultimoResgistro = true;
                 }
 
-                linea = linea.substring(linea.indexOf("{") + 1, linea.lastIndexOf("}") - 1);
+                linea = linea.substring(linea.indexOf("{") + 1, linea.lastIndexOf("}"));
 
                 String[] atributosCliente = linea.split(",");
 

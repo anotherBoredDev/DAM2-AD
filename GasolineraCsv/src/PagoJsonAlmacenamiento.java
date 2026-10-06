@@ -5,10 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 
@@ -85,23 +82,6 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
         try (BufferedReader reader = Files.newBufferedReader(fichero)) {
             String linea;
 
-            // Comprueba que la estructura de json es válida
-            if ((linea = reader.readLine()) == null) {
-                throw new IOException("El fichero Json que se intenta leer está vacío.");
-            }
-
-            if (!linea.strip().equals("{")) {
-                throw new RuntimeException("Formato del fichero Json inválido.");
-            }
-
-            if ((linea = reader.readLine()) == null) {
-                throw new IOException("El fichero Json que se intenta leer está incompleto.");
-            }
-
-            if (!linea.strip().equals("[")) {
-                throw new RuntimeException("Formato del fichero Json inválido.");
-            }
-
             while ((linea = reader.readLine()) != null) {
                 boolean ultimoResgistro = false;
                 linea = linea.strip();
@@ -110,13 +90,14 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
                     ultimoResgistro = true;
                 }
 
-                linea = linea.substring(linea.indexOf("{") + 1, linea.lastIndexOf("}") - 1);
+                linea = linea.substring(linea.indexOf("{") + 1, linea.lastIndexOf("}"));
 
                 String[] atributosPago = linea.split(",");
 
                 for (int i = 0; i < atributosPago.length; i++) {
                     String atributo = atributosPago[i].strip();
                     atributo = atributo.substring(atributo.indexOf(":") + 1).strip();
+
                     if (atributo.contains("\"")) {
                         atributo = atributo.substring(atributo.indexOf("\"") + 1, atributo.length() - 1);
                     }
