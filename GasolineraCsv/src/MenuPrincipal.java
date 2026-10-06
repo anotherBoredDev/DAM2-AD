@@ -63,7 +63,7 @@ public class MenuPrincipal {
             case 3 -> buscarCliente();
             case 4 -> procesarPago();
             case 5 -> consultarPagos();
-            case 0 -> { }
+            case 0 -> finalizarEjecucion();
             default -> System.out.println("Opción inválida");
         }
     }
@@ -181,5 +181,10 @@ public class MenuPrincipal {
             System.out.printf("%s %s %s %s %s %s%n", id, idCliente, fecha, importe, litros, combustible);
         }
         imprimirSeparador();
+    }
+
+    private void finalizarEjecucion() {
+        clienteGestor.finalizarEjecucion();
+        pagoGestor.finalizarEjecucion();
     }
 }

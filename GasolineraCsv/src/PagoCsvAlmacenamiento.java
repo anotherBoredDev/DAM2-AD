@@ -9,16 +9,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
-import static java.nio.file.StandardOpenOption.APPEND;
-import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.*;
 
 public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
     private final Path directorio;
     private final Path fichero;
+    private final String cabecera;
 
     public PagoCsvAlmacenamiento() {
         this.directorio = Path.of("datos");
         this.fichero = directorio.resolve("pagos.csv");
+        cabecera = "id,idCliente,fecha,importe,litros,combustible;" + System.lineSeparator();
         prepararAlmacenamiento();
     }
 
@@ -28,8 +29,7 @@ public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
                 Files.createDirectory(directorio);
             }
 
-            if (Files.notExists(fichero)) {
-                String cabecera = "id,idCliente,fecha,importe,litros,combustible;" + System.lineSeparator();
+            if (Files.notExists(fichero) || Files.readAllLines(fichero).isEmpty()) {
                 Files.writeString(fichero, cabecera, StandardCharsets.UTF_8, CREATE);
             }
 
@@ -57,6 +57,19 @@ public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
 
         } catch (IOException e) {
             System.out.println("Se ha producido un error al guardar un pago en " + fichero + ". Id pago " + entidad.getId());
+        }
+    }
+
+    @Override
+    public void guardarTodos(Collection<Pago> entidades) {
+        try {
+            Files.writeString(fichero, cabecera, StandardCharsets.UTF_8, TRUNCATE_EXISTING);
+
+            for (Pago entidad : entidades) {
+                guardar(entidad);
+            }
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error al guardar clientes en " + fichero + ".");
         }
     }
 

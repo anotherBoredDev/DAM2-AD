@@ -20,7 +20,8 @@ public class PagoGestor {
 
          Pago pago = new Pago(id, idCliente, fecha, importe, litros, combustible);
 
-         pagoAlmacenamiento.guardar(pago);
+         // Solo guardar clientes al finalizar el programa. Descomentar para guardar progresivamente.
+         // pagoAlmacenamiento.guardar(pago);
          pagosEnMemoria.add(pago);
 
          return pago;
@@ -38,5 +39,9 @@ public class PagoGestor {
 
     public List<Pago> conseguirTodosPagos() {
         return pagosEnMemoria;
+    }
+
+    public void finalizarEjecucion() {
+        pagoAlmacenamiento.guardarTodos(pagosEnMemoria);
     }
 }

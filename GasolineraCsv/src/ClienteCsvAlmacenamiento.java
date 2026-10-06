@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -7,16 +8,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
-import static java.nio.file.StandardOpenOption.APPEND;
-import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.*;
 
 public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
     private final Path directorio;
     private final Path fichero;
+    private final String cabecera;
 
     public ClienteCsvAlmacenamiento() {
         this.directorio = Path.of("datos");
         this.fichero = directorio.resolve("clientes.csv");
+        cabecera = "id,nombre,telefono,matricula;" + System.lineSeparator();
         prepararAlmacenamiento();
     }
 
@@ -26,8 +28,7 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
                 Files.createDirectory(directorio);
             }
 
-            if (Files.notExists(fichero)) {
-                String cabecera = "id,nombre,telefono,matricula;" + System.lineSeparator();
+            if (Files.notExists(fichero) || Files.readAllLines(fichero).isEmpty()) {
                 Files.writeString(fichero, cabecera, StandardCharsets.UTF_8, CREATE);
             }
 
@@ -53,6 +54,19 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
 
         } catch (IOException e) {
             System.out.println("Se ha producido un error al guardar un cliente en " + fichero + ". Id cliente " + entidad.getId());
+        }
+    }
+
+    @Override
+    public void guardarTodos(Collection<Cliente> entidades) {
+        try {
+            Files.writeString(fichero, cabecera, StandardCharsets.UTF_8, TRUNCATE_EXISTING);
+
+            for (Cliente entidad : entidades) {
+                guardar(entidad);
+            }
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error al guardar clientes en " + fichero + ".");
         }
     }
 

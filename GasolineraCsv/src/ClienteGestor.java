@@ -26,7 +26,8 @@ public class ClienteGestor {
         int id = conseguirSiguienteId();
         Cliente cliente = new Cliente(id, nombre, telefono, matricula);
 
-        clienteAlmacenamiento.guardar(cliente);
+        // Solo guardar clientes al finalizar el programa. Descomentar para guardar progresivamente.
+        // clienteAlmacenamiento.guardar(cliente);
         clientesEnMemoria.add(cliente);
 
         return cliente;
@@ -57,6 +58,10 @@ public class ClienteGestor {
         }
 
         return coincidencias;
+    }
+
+    public void finalizarEjecucion() {
+        clienteAlmacenamiento.guardarTodos(clientesEnMemoria);
     }
 
     private int conseguirSiguienteId() {
