@@ -1,5 +1,5 @@
 {
   [
-    {"id": 1, "clienteId": 1, "fecha": "2026-09-11", "importe": 40.50, "litros": 25.00, "combustible": "Gasolina 95"}
+    {"id": 1, "clienteId": 1, "fecha": "11/09/2026", "importe": 40.50, "litros": 25.00, "combustible": "Gasolina 95"}
   ]
 }
