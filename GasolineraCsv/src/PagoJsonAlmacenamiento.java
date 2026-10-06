@@ -43,19 +43,12 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
     @Override
     public void guardar(Pago entidad) {
         try {
-            String[] nombreAtributos = {"id", "clienteId", "fecha", "importe", "litros", "combustible"};
-            String registro = String.format(Locale.ROOT, "{\"%s\": %d,\"%s\": %d,\"%s\": \"%s\",\"%s\": \"%.2f\",\"%s\": \"%f\",\"%s\": \"%s\"},",
-                    nombreAtributos[0],
+            String registro = String.format(Locale.ROOT, "{\"id\": %d,\"idCliente\": %d,\"fecha\": \"%s\",\"importe\": \"%.2f\",\"litros\": \"%f\",\"combustible\": \"%s\"},",
                     entidad.getId(),
-                    nombreAtributos[1],
                     entidad.getIdCliente(),
-                    nombreAtributos[2],
                     entidad.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                    nombreAtributos[3],
                     entidad.getImporte(),
-                    nombreAtributos[4],
                     entidad.getLitros(),
-                    nombreAtributos[5],
                     entidad.getCombustible()
             ) + System.lineSeparator();
 

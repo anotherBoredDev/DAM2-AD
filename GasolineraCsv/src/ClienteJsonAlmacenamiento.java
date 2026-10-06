@@ -44,15 +44,10 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     @Override
     public void guardar(Cliente entidad) {
         try {
-            String[] nombreAtributos = {"id", "nombre", "telefono", "matricula"};
-            String registro = String.format(Locale.ROOT, "{\"%s\": %d,\"%s\": \"%s\",\"%s\": \"%s\",\"%s\": \"%s\"},",
-                    nombreAtributos[0],
+            String registro = String.format(Locale.ROOT, "{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"},",
                     entidad.getId(),
-                    nombreAtributos[1],
                     entidad.getNombre(),
-                    nombreAtributos[2],
                     entidad.getTelefono(),
-                    nombreAtributos[3],
                     entidad.getMatricula()
             ) + System.lineSeparator();
 
