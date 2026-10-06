@@ -76,6 +76,67 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     public Collection<Cliente> obtenerTodos() {
         Collection<Cliente> clientes = new ArrayList<>();
 
+        try (BufferedReader reader = Files.newBufferedReader(fichero)) {
+            String linea;
+
+            // Comprueba que la estructura de json es válida
+            if ((linea = reader.readLine()) == null) {
+                throw new IOException("El fichero Json que se intenta leer está vacío.");
+            }
+
+            if (!linea.strip().equals("{")) {
+                throw new RuntimeException("Formato del fichero Json inválido.");
+            }
+
+            if ((linea = reader.readLine()) == null) {
+                throw new IOException("El fichero Json que se intenta leer está incompleto.");
+            }
+
+            if (!linea.strip().equals("[")) {
+                throw new RuntimeException("Formato del fichero Json inválido.");
+            }
+
+            while ((linea = reader.readLine()) != null) {
+                boolean ultimoResgistro = false;
+                linea = linea.strip();
+
+                if (!linea.endsWith(",")) {
+                    ultimoResgistro = true;
+                }
+
+                linea = linea.substring(linea.indexOf("{") + 1, linea.lastIndexOf("}") - 1);
+
+                String[] atributosCliente = linea.split(",");
+
+                for (int i = 0; i < atributosCliente.length; i++) {
+                    String atributo = atributosCliente[i].strip();
+                    atributo = atributo.substring(atributo.indexOf(":") + 1).strip();
+                    if (atributo.contains("\"")) {
+                        atributo = atributo.substring(atributo.indexOf("\"") + 1, atributo.length() - 1);
+                    }
+                    atributosCliente[i] = atributo;
+                }
+
+                Cliente c = new Cliente(
+                        Integer.parseInt(atributosCliente[0]),
+                        atributosCliente[1],
+                        atributosCliente[2],
+                        atributosCliente[3]
+                );
+
+                clientes.add(c);
+
+                if (ultimoResgistro) {
+                    return clientes; // se ha llegado al último registro
+                }
+            }
+
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error al leer los datos de " + fichero);
+        }
 
         return clientes;
     }
