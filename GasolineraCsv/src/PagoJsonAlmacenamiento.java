@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
     private final Path directorio;
@@ -70,8 +71,13 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
 
     @Override
     public void guardarTodos(Collection<Pago> entidades) {
-        for (Pago entidad : entidades) {
-            guardar(entidad);
+        try {
+            Files.writeString(fichero, "", StandardCharsets.UTF_8, TRUNCATE_EXISTING);
+            for (Pago entidad : entidades) {
+                guardar(entidad);
+            }
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error al guardar clientes en " + fichero + ".");
         }
     }
 

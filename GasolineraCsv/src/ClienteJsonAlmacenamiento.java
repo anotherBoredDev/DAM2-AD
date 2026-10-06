@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Locale;
 
 import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     private final Path directorio;
@@ -67,8 +68,13 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
 
     @Override
     public void guardarTodos(Collection<Cliente> entidades) {
-        for (Cliente entidad : entidades) {
-            guardar(entidad);
+        try {
+            Files.writeString(fichero, "", StandardCharsets.UTF_8, TRUNCATE_EXISTING);
+            for (Cliente entidad : entidades) {
+                guardar(entidad);
+            }
+        } catch (IOException e) {
+            System.out.println("Se ha producido un error al guardar clientes en " + fichero + ".");
         }
     }
 
