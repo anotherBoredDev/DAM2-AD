@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -7,10 +8,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import static java.nio.file.StandardOpenOption.APPEND;
-import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
-
 public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
+    private final String aperturaJson = "{" + System.lineSeparator() + "[" + System.lineSeparator();
+    private final String cierreJson = System.lineSeparator() + "]" + System.lineSeparator() + "}";
+
     private final Path directorio;
     private final Path fichero;
 
@@ -40,37 +41,49 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
         }
     }
 
+    private String convertirPagoToJson(Pago p) {
+        return String.format(Locale.ROOT, "{\"id\": %d,\"idCliente\": %d,\"fecha\": \"%s\",\"importe\": \"%.2f\",\"litros\": \"%f\",\"combustible\": \"%s\"},",
+                p.getId(),
+                p.getIdCliente(),
+                p.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                p.getImporte(),
+                p.getLitros(),
+                p.getCombustible()
+        );
+    }
+
     @Override
     public void guardar(Pago entidad) {
-        try {
-            String registro = String.format(Locale.ROOT, "{\"id\": %d,\"idCliente\": %d,\"fecha\": \"%s\",\"importe\": \"%.2f\",\"litros\": \"%f\",\"combustible\": \"%s\"},",
-                    entidad.getId(),
-                    entidad.getIdCliente(),
-                    entidad.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                    entidad.getImporte(),
-                    entidad.getLitros(),
-                    entidad.getCombustible()
-            ) + System.lineSeparator();
+        List<Pago> listaClientes = (List<Pago>) obtenerTodos();
+        listaClientes.add(entidad);
 
-            Files.writeString(fichero, registro ,
-                    StandardCharsets.UTF_8,
-                    APPEND
-            );
+        String pagosEnJson = listaClientes.stream()
+                .map(this::convertirPagoToJson)
+                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2)
+                .orElse("");
 
+        try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
+            writer.write(aperturaJson);
+            writer.append(pagosEnJson);
+            writer.append(cierreJson);
         } catch (IOException e) {
-            System.out.println("Se ha producido un error al guardar un cliente en " + fichero + ". Id cliente " + entidad.getId());
+            System.out.println("Se ha producido un error al guardar un pago en " + fichero + ". Id cliente " + entidad.getId());
         }
     }
 
     @Override
     public void guardarTodos(Collection<Pago> entidades) {
-        try {
-            Files.writeString(fichero, "", StandardCharsets.UTF_8, TRUNCATE_EXISTING);
-            for (Pago entidad : entidades) {
-                guardar(entidad);
-            }
+        String pagosEnJson = entidades.stream()
+                .map(this::convertirPagoToJson)
+                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2)
+                .orElse("");
+
+        try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
+            writer.write(aperturaJson);
+            writer.append(pagosEnJson);
+            writer.append(cierreJson);
         } catch (IOException e) {
-            System.out.println("Se ha producido un error al guardar clientes en " + fichero + ".");
+            System.out.println("Se ha producido un error al guardar todos los pagos en " + fichero + ".");
         }
     }
 

@@ -39,19 +39,24 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
         }
     }
 
+    private String convertirClienteToJson(Cliente c) {
+        return String.format(Locale.ROOT,"{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"}",
+                c.getId(),
+                c.getNombre(),
+                c.getTelefono(),
+                c.getMatricula()
+        );
+    }
+
     @Override
     public void guardar(Cliente entidad) {
         List<Cliente> listaClientes = (List<Cliente>) obtenerTodos();
         listaClientes.add(entidad);
 
         String clientesEnJson = listaClientes.stream()
-                .map((Cliente cliente) ->
-                    String.format(Locale.ROOT, "{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"}",
-                        cliente.getId(),
-                        cliente.getNombre(),
-                        cliente.getTelefono(),
-                        cliente.getMatricula())
-                ).reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2).orElse("");
+                .map(this::convertirClienteToJson)
+                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2)
+                .orElse("");
 
         try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
             writer.write(aperturaJson);
@@ -65,13 +70,9 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     @Override
     public void guardarTodos(Collection<Cliente> entidades) {
         String clientesEnJson = entidades.stream()
-                .map((Cliente cliente) ->
-                        String.format(Locale.ROOT, "{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"}",
-                                cliente.getId(),
-                                cliente.getNombre(),
-                                cliente.getTelefono(),
-                                cliente.getMatricula())
-                ).reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2).orElse("");
+                .map(this::convertirClienteToJson)
+                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2)
+                .orElse("");
 
         try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
             writer.write(aperturaJson);
