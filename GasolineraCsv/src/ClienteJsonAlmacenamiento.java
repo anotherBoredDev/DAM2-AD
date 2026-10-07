@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -31,7 +30,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     }
 
     private String convertirClienteToJson(Cliente c) {
-        return String.format(Locale.ROOT,"{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"}",
+        return String.format(Locale.ROOT, "{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"}",
                 c.getId(),
                 c.getNombre(),
                 c.getTelefono(),
@@ -50,7 +49,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
                 .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
                 .orElse("");
 
-        try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
+        try (BufferedWriter writer = Files.newBufferedWriter(fichero)) {
             writer.write(aperturaJson);
             writer.append(clientesEnJson);
             writer.append(cierreJson);
@@ -67,7 +66,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
                 .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
                 .orElse("");
 
-        try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
+        try (BufferedWriter writer = Files.newBufferedWriter(fichero)) {
             writer.write(aperturaJson);
             writer.append(clientesEnJson);
             writer.append(cierreJson);
@@ -81,14 +80,31 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
         Collection<Cliente> clientes = new ArrayList<>();
 
         try (BufferedReader reader = Files.newBufferedReader(fichero)) {
-            String linea;
+            // Comprueba que el fichero inicia con el formato correcto
+            String linea1 = reader.readLine();
+            String linea2 = reader.readLine();
 
-            while ((linea = reader.readLine()) != null) {
-                boolean ultimoResgistro = false;
+            if (linea1 == null || linea2 == null) {
+                throw new RuntimeException("Error: Json inválido en el fichero " + fichero + ".");
+            }
+
+            if (!linea1.strip().equals(aperturaJson.strip().split(System.lineSeparator())[0].strip())
+                    || !linea2.strip().equals(aperturaJson.strip().split(System.lineSeparator())[1].strip())) {
+                throw new RuntimeException("Error: Json inválido en el fichero " + fichero + ".");
+            }
+
+            // Lee los datos y crea los clientes
+            String linea;
+            boolean quedanRegistros = true;
+            while (quedanRegistros && (linea = reader.readLine()) != null) {
                 linea = linea.strip();
 
+                if (linea.isEmpty()) {
+                    return clientes;
+                }
+
                 if (!linea.endsWith(",")) {
-                    ultimoResgistro = true;
+                    quedanRegistros = false;
                 }
 
                 linea = linea.substring(linea.indexOf("{") + 1, linea.lastIndexOf("}"));
@@ -112,10 +128,20 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
                 );
 
                 clientes.add(c);
+            }
 
-                if (ultimoResgistro) {
-                    return clientes; // se ha llegado al último registro
-                }
+
+            // Comprueba que el fichero cierra con el formato correcto
+            linea1 = reader.readLine();
+            linea2 = reader.readLine();
+
+            if (linea1 == null || linea2 == null) {
+                throw new RuntimeException("Error: Json inválido en el fichero " + fichero + ".");
+            }
+
+            if (!linea1.strip().equals(cierreJson.strip().split(System.lineSeparator())[0].strip())
+                    || !linea2.strip().equals(cierreJson.strip().split(System.lineSeparator())[1].strip())) {
+                throw new RuntimeException("Error: Json inválido en el fichero " + fichero + ".");
             }
 
         } catch (RuntimeException e) {
