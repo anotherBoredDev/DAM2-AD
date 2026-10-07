@@ -1,5 +1,8 @@
 {
-[
-{"id": 1,"idCliente": 1,"fecha": "11/09/2026","importe": "40.50","litros": "25.000000","combustible": "Gasolina 95"},
-]
+  [
+    {"id": 1,"idCliente": 1,"fecha": "07/09/2026","importe": "25.05","litros": "8.200000","combustible": "Gasolina 95"},
+    {"id": 2,"idCliente": 2,"fecha": "29/09/2026","importe": "5000.00","litros": "2.280000","combustible": "Gasolina 95"},
+    {"id": 3,"idCliente": 2,"fecha": "29/09/2026","importe": "2.00","litros": "50.000000","combustible": "Gasolina 95"},
+    {"id": 4,"idCliente": 1,"fecha": "03/03/2026","importe": "12.23","litros": "20.000000","combustible": "Diésel"}
+  ]
 }
