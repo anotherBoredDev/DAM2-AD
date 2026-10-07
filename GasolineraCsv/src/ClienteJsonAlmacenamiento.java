@@ -3,7 +3,10 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
 
 public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     private final String aperturaJson = "{" + System.lineSeparator() + "  [" + System.lineSeparator();
@@ -30,12 +33,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     }
 
     private String convertirClienteToJson(Cliente c) {
-        return String.format(Locale.ROOT, "{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"}",
-                c.getId(),
-                c.getNombre(),
-                c.getTelefono(),
-                c.getMatricula()
-        );
+        return String.format(Locale.ROOT, "{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"}", c.getId(), c.getNombre(), c.getTelefono(), c.getMatricula());
     }
 
     @Override
@@ -43,8 +41,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
         List<Cliente> listaClientes = (List<Cliente>) obtenerTodos();
         listaClientes.add(entidad);
 
-        String clientesEnJson = listaClientes.stream()
-                .map(this::convertirClienteToJson) // transformar objetos Cliente en objeto json con los datos del cliente
+        String clientesEnJson = listaClientes.stream().map(this::convertirClienteToJson) // transformar objetos Cliente en objeto json con los datos del cliente
                 .map((String string) -> " ".repeat(4) + string) // indentación para formato correcto
                 .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
                 .orElse("");
@@ -60,8 +57,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
 
     @Override
     public void guardarTodos(Collection<Cliente> entidades) {
-        String clientesEnJson = entidades.stream()
-                .map(this::convertirClienteToJson) // transformar objetos Cliente en objeto json con los datos del cliente
+        String clientesEnJson = entidades.stream().map(this::convertirClienteToJson) // transformar objetos Cliente en objeto json con los datos del cliente
                 .map((String string) -> " ".repeat(4) + string) // indentación para formato correcto
                 .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
                 .orElse("");
@@ -88,8 +84,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
                 throw new RuntimeException("Error: Json inválido en el fichero " + fichero + ".");
             }
 
-            if (!linea1.strip().equals(aperturaJson.strip().split(System.lineSeparator())[0].strip())
-                    || !linea2.strip().equals(aperturaJson.strip().split(System.lineSeparator())[1].strip())) {
+            if (!linea1.strip().equals(aperturaJson.strip().split(System.lineSeparator())[0].strip()) || !linea2.strip().equals(aperturaJson.strip().split(System.lineSeparator())[1].strip())) {
                 throw new RuntimeException("Error: Json inválido en el fichero " + fichero + ".");
             }
 
@@ -120,12 +115,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
                     atributosCliente[i] = atributo;
                 }
 
-                Cliente c = new Cliente(
-                        Integer.parseInt(atributosCliente[0]),
-                        atributosCliente[1],
-                        atributosCliente[2],
-                        atributosCliente[3]
-                );
+                Cliente c = new Cliente(Integer.parseInt(atributosCliente[0]), atributosCliente[1], atributosCliente[2], atributosCliente[3]);
 
                 clientes.add(c);
             }
@@ -139,8 +129,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
                 throw new RuntimeException("Error: Json inválido en el fichero " + fichero + ".");
             }
 
-            if (!linea1.strip().equals(cierreJson.strip().split(System.lineSeparator())[0].strip())
-                    || !linea2.strip().equals(cierreJson.strip().split(System.lineSeparator())[1].strip())) {
+            if (!linea1.strip().equals(cierreJson.strip().split(System.lineSeparator())[0].strip()) || !linea2.strip().equals(cierreJson.strip().split(System.lineSeparator())[1].strip())) {
                 throw new RuntimeException("Error: Json inválido en el fichero " + fichero + ".");
             }
 

@@ -137,7 +137,7 @@ public class MenuPrincipal {
 
         if (indiceCombustible == 1) {
             combustible = "Gasolina 95";
-        } else if (indiceCombustible == 2 ){
+        } else if (indiceCombustible == 2) {
             combustible = "Diésel";
         } else {
             combustible = "Desconocido";

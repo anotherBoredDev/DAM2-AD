@@ -1,8 +1,8 @@
-public class Cliente implements Comparable<Cliente>{
+public class Cliente implements Comparable<Cliente> {
     private final int id;
-    private String nombre;
-    private String telefono;
-    private String matricula;
+    private final String nombre;
+    private final String telefono;
+    private final String matricula;
 
     public Cliente(int id, String nombre, String telefono, String matricula) {
         this.id = id;

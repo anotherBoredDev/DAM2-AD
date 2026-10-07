@@ -8,7 +8,7 @@ public class Main {
         ClienteGestor clienteGestor = new ClienteGestor(clienteAlmacenamiento);
         PagoGestor pagoGestor = new PagoGestor(pagoAlmacenamiento);
 
-        try (Scanner scanner = new Scanner(System.in)){
+        try (Scanner scanner = new Scanner(System.in)) {
             LectorConsola lectorConsola = new LectorConsola(scanner);
 
             MenuPrincipal menuPrincipal = new MenuPrincipal(clienteGestor, pagoGestor, lectorConsola);

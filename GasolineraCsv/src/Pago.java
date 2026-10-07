@@ -2,11 +2,11 @@ import java.time.LocalDate;
 
 public class Pago implements Comparable<Pago> {
     private final int id;
-    private int idCliente;
-    private LocalDate fecha;
-    private float importe;
-    private float litros;
-    private String combustible;
+    private final int idCliente;
+    private final LocalDate fecha;
+    private final float importe;
+    private final float litros;
+    private final String combustible;
 
     public Pago(int id, int idCliente, LocalDate fecha, float importe, float litros, String combustible) {
         this.id = id;

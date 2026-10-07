@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -47,7 +46,7 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
                     entidad.getMatricula()
             ) + System.lineSeparator();
 
-            Files.writeString(fichero, registro ,
+            Files.writeString(fichero, registro,
                     StandardCharsets.UTF_8,
                     APPEND
             );
@@ -76,7 +75,7 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
 
         try (BufferedReader reader = Files.newBufferedReader(fichero)) {
             String linea = reader.readLine(); // lee el header del archivo csv
-            int cantidadCampos =  linea.split(",").length; // guarda la cantidad de campos de un registro correcto
+            int cantidadCampos = linea.split(",").length; // guarda la cantidad de campos de un registro correcto
 
             int lineaActual = 1;
 

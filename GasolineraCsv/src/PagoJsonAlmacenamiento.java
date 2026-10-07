@@ -1,12 +1,14 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
 
 public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
     private final String aperturaJson = "{" + System.lineSeparator() + "  [" + System.lineSeparator();
@@ -55,7 +57,7 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
                 .orElse("");
 
 
-        try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
+        try (BufferedWriter writer = Files.newBufferedWriter(fichero)) {
             writer.write(aperturaJson);
             writer.append(pagosEnJson);
             writer.append(cierreJson);
@@ -73,7 +75,7 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
                 .orElse("");
 
 
-        try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
+        try (BufferedWriter writer = Files.newBufferedWriter(fichero)) {
             writer.write(aperturaJson);
             writer.append(pagosEnJson);
             writer.append(cierreJson);

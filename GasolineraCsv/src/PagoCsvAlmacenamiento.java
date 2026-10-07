@@ -50,7 +50,7 @@ public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
                     entidad.getCombustible()
             ) + System.lineSeparator();
 
-            Files.writeString(fichero, registro ,
+            Files.writeString(fichero, registro,
                     StandardCharsets.UTF_8,
                     APPEND
             );
@@ -79,7 +79,7 @@ public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
 
         try (BufferedReader reader = Files.newBufferedReader(fichero)) {
             String linea = reader.readLine(); // lee el header del archivo csv
-            int cantidadCampos =  linea.split(",").length; // guarda la cantidad de campos de un registro correcto
+            int cantidadCampos = linea.split(",").length; // guarda la cantidad de campos de un registro correcto
 
             int lineaActual = 1;
 
