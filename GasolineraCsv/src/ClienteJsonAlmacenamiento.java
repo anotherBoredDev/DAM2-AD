@@ -4,11 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.sql.SQLOutput;
 import java.util.*;
-
-import static java.nio.file.StandardOpenOption.APPEND;
-import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     private final String aperturaJson = "{" + System.lineSeparator() + "[" + System.lineSeparator();
