@@ -7,8 +7,8 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
-    private final String aperturaJson = "{" + System.lineSeparator() + "[" + System.lineSeparator();
-    private final String cierreJson = System.lineSeparator() + "]" + System.lineSeparator() + "}";
+    private final String aperturaJson = "{" + System.lineSeparator() + "  [" + System.lineSeparator();
+    private final String cierreJson = System.lineSeparator() + "  ]" + System.lineSeparator() + "}";
 
     private final Path directorio;
     private final Path fichero;
@@ -23,15 +23,6 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
         try {
             if (Files.notExists(directorio)) {
                 Files.createDirectory(directorio);
-            }
-
-            if (Files.notExists(fichero) || Files.readAllLines(fichero).isEmpty()) {
-                String estructuraInicial ="{" + System.lineSeparator()
-                        + "  [" + System.lineSeparator()
-                        + "  ]" + System.lineSeparator()
-                        + "}" + System.lineSeparator();
-
-                Files.writeString(fichero, estructuraInicial, StandardCharsets.UTF_8);
             }
 
         } catch (IOException e) {
@@ -54,8 +45,9 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
         listaClientes.add(entidad);
 
         String clientesEnJson = listaClientes.stream()
-                .map(this::convertirClienteToJson)
-                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2)
+                .map(this::convertirClienteToJson) // transformar objetos Cliente en objeto json con los datos del cliente
+                .map((String string) -> " ".repeat(4) + string) // indentación para formato correcto
+                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
                 .orElse("");
 
         try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
@@ -70,8 +62,9 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     @Override
     public void guardarTodos(Collection<Cliente> entidades) {
         String clientesEnJson = entidades.stream()
-                .map(this::convertirClienteToJson)
-                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2)
+                .map(this::convertirClienteToJson) // transformar objetos Cliente en objeto json con los datos del cliente
+                .map((String string) -> " ".repeat(4) + string) // indentación para formato correcto
+                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
                 .orElse("");
 
         try (BufferedWriter writer = Files.newBufferedWriter(fichero)){

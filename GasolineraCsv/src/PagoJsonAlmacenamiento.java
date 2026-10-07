@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
-    private final String aperturaJson = "{" + System.lineSeparator() + "[" + System.lineSeparator();
-    private final String cierreJson = System.lineSeparator() + "]" + System.lineSeparator() + "}";
+    private final String aperturaJson = "{" + System.lineSeparator() + "  [" + System.lineSeparator();
+    private final String cierreJson = System.lineSeparator() + "  ]" + System.lineSeparator() + "}";
 
     private final Path directorio;
     private final Path fichero;
@@ -25,15 +25,6 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
         try {
             if (Files.notExists(directorio)) {
                 Files.createDirectory(directorio);
-            }
-
-            if (Files.notExists(fichero) || Files.readAllLines(fichero).isEmpty()) {
-                String estructuraInicial ="{" + System.lineSeparator()
-                        + "  [" + System.lineSeparator()
-                        + "  ]" + System.lineSeparator()
-                        + "}" + System.lineSeparator();
-
-                Files.writeString(fichero, estructuraInicial, StandardCharsets.UTF_8);
             }
 
         } catch (IOException e) {
@@ -58,9 +49,11 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
         listaClientes.add(entidad);
 
         String pagosEnJson = listaClientes.stream()
-                .map(this::convertirPagoToJson)
-                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2)
+                .map(this::convertirPagoToJson) // transformar objetos Pago en objeto json con los datos del pago
+                .map((String string) -> " ".repeat(4) + string) // indentación para formato correcto
+                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
                 .orElse("");
+
 
         try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
             writer.write(aperturaJson);
@@ -74,9 +67,11 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
     @Override
     public void guardarTodos(Collection<Pago> entidades) {
         String pagosEnJson = entidades.stream()
-                .map(this::convertirPagoToJson)
-                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2)
+                .map(this::convertirPagoToJson) // transformar objetos Pago en objeto json con los datos del pago
+                .map((String string) -> " ".repeat(4) + string) // indentación para formato correcto
+                .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
                 .orElse("");
+
 
         try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
             writer.write(aperturaJson);
