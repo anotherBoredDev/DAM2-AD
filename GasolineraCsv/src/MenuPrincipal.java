@@ -16,6 +16,8 @@ public class MenuPrincipal {
     }
 
     public void iniciar() {
+        MigracionCsvToJson migracionCsvToJson = new MigracionCsvToJson("datos");
+        migracionCsvToJson.migrar();
         int opcion;
         do {
             mostrarMenu();
