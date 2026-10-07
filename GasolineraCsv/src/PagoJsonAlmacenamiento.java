@@ -17,9 +17,9 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
     private final Path directorio;
     private final Path fichero;
 
-    public PagoJsonAlmacenamiento() {
-        this.directorio = Path.of("datos");
-        this.fichero = directorio.resolve("pagos.json");
+    public PagoJsonAlmacenamiento(String directorio) {
+        this.directorio = Path.of(directorio);
+        this.fichero = this.directorio.resolve("clientes.json");
         prepararAlmacenamiento();
     }
 

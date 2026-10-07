@@ -16,10 +16,10 @@ public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
     private final Path fichero;
     private final String cabecera;
 
-    public PagoCsvAlmacenamiento() {
-        this.directorio = Path.of("datos");
-        this.fichero = directorio.resolve("pagos.csv");
-        cabecera = "id,idCliente,fecha,importe,litros,combustible;" + System.lineSeparator();
+    public PagoCsvAlmacenamiento(String directorio) {
+        this.directorio = Path.of(directorio);
+        this.fichero = this.directorio.resolve("pagos.csv");
+        this.cabecera = "id,idCliente,fecha,importe,litros,combustible;" + System.lineSeparator();
         prepararAlmacenamiento();
     }
 

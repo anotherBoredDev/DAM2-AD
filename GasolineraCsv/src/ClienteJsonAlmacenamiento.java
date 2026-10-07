@@ -15,9 +15,9 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     private final Path directorio;
     private final Path fichero;
 
-    public ClienteJsonAlmacenamiento() {
-        this.directorio = Path.of("datos");
-        this.fichero = directorio.resolve("clientes.json");
+    public ClienteJsonAlmacenamiento(String directorio) {
+        this.directorio = Path.of(directorio);
+        this.fichero = this.directorio.resolve("clientes.json");
         prepararAlmacenamiento();
     }
 

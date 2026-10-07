@@ -14,10 +14,10 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
     private final Path fichero;
     private final String cabecera;
 
-    public ClienteCsvAlmacenamiento() {
-        this.directorio = Path.of("datos");
-        this.fichero = directorio.resolve("clientes.csv");
-        cabecera = "id,nombre,telefono,matricula;" + System.lineSeparator();
+    public ClienteCsvAlmacenamiento(String directorio) {
+        this.directorio = Path.of(directorio);
+        this.fichero = this.directorio.resolve("clientes.csv");
+        this.cabecera = "id,nombre,telefono,matricula;" + System.lineSeparator();
         prepararAlmacenamiento();
     }
 
