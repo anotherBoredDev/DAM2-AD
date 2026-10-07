@@ -1,17 +1,19 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Locale;
+import java.sql.SQLOutput;
+import java.util.*;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
+    private final String aperturaJson = "{" + System.lineSeparator() + "[" + System.lineSeparator();
+    private final String cierreJson = System.lineSeparator() + "]" + System.lineSeparator() + "}";
+
     private final Path directorio;
     private final Path fichero;
 
@@ -43,19 +45,22 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
 
     @Override
     public void guardar(Cliente entidad) {
-        try {
-            String registro = String.format(Locale.ROOT, "{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"},",
-                    entidad.getId(),
-                    entidad.getNombre(),
-                    entidad.getTelefono(),
-                    entidad.getMatricula()
-            ) + System.lineSeparator();
+        List<Cliente> listaClientes = (List<Cliente>) obtenerTodos();
+        listaClientes.add(entidad);
 
-            Files.writeString(fichero, registro ,
-                    StandardCharsets.UTF_8,
-                    APPEND
-            );
+        String clientesEnJson = listaClientes.stream()
+                .map((Cliente cliente) ->
+                    String.format(Locale.ROOT, "{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"}",
+                        cliente.getId(),
+                        cliente.getNombre(),
+                        cliente.getTelefono(),
+                        cliente.getMatricula())
+                ).reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2).orElse("");
 
+        try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
+            writer.write(aperturaJson);
+            writer.append(clientesEnJson);
+            writer.append(cierreJson);
         } catch (IOException e) {
             System.out.println("Se ha producido un error al guardar un cliente en " + fichero + ". Id cliente " + entidad.getId());
         }
@@ -63,13 +68,21 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
 
     @Override
     public void guardarTodos(Collection<Cliente> entidades) {
-        try {
-            Files.writeString(fichero, "", StandardCharsets.UTF_8, TRUNCATE_EXISTING);
-            for (Cliente entidad : entidades) {
-                guardar(entidad);
-            }
+        String clientesEnJson = entidades.stream()
+                .map((Cliente cliente) ->
+                        String.format(Locale.ROOT, "{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"}",
+                                cliente.getId(),
+                                cliente.getNombre(),
+                                cliente.getTelefono(),
+                                cliente.getMatricula())
+                ).reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2).orElse("");
+
+        try (BufferedWriter writer = Files.newBufferedWriter(fichero)){
+            writer.write(aperturaJson);
+            writer.append(clientesEnJson);
+            writer.append(cierreJson);
         } catch (IOException e) {
-            System.out.println("Se ha producido un error al guardar clientes en " + fichero + ".");
+            System.out.println("Se ha producido un error al guardar todos los clientes en " + fichero + ".");
         }
     }
 
