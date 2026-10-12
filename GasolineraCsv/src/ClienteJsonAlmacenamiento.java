@@ -3,10 +3,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     private final String aperturaJson = "{" + System.lineSeparator() + "  [" + System.lineSeparator();
@@ -41,7 +38,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
         List<Cliente> listaClientes = (List<Cliente>) obtenerTodos();
         listaClientes.add(entidad);
 
-        String clientesEnJson = listaClientes.stream().map(this::convertirClienteToJson) // transformar objetos Cliente en objeto json con los datos del cliente
+        String clientesEnJson = listaClientes.stream().sorted().map(this::convertirClienteToJson) // transformar objetos Cliente en objeto json con los datos del cliente
                 .map((String string) -> " ".repeat(4) + string) // indentación para formato correcto
                 .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
                 .orElse("");
@@ -57,7 +54,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
 
     @Override
     public void guardarTodos(Collection<Cliente> entidades) {
-        String clientesEnJson = entidades.stream().map(this::convertirClienteToJson) // transformar objetos Cliente en objeto json con los datos del cliente
+        String clientesEnJson = entidades.stream().sorted().map(this::convertirClienteToJson) // transformar objetos Cliente en objeto json con los datos del cliente
                 .map((String string) -> " ".repeat(4) + string) // indentación para formato correcto
                 .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
                 .orElse("");

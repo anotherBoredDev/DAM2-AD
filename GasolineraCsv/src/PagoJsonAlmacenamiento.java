@@ -51,6 +51,7 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
         listaClientes.add(entidad);
 
         String pagosEnJson = listaClientes.stream()
+                .sorted()
                 .map(this::convertirPagoToJson) // transformar objetos Pago en objeto json con los datos del pago
                 .map((String string) -> " ".repeat(4) + string) // indentación para formato correcto
                 .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
@@ -69,6 +70,7 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
     @Override
     public void guardarTodos(Collection<Pago> entidades) {
         String pagosEnJson = entidades.stream()
+                .sorted()
                 .map(this::convertirPagoToJson) // transformar objetos Pago en objeto json con los datos del pago
                 .map((String string) -> " ".repeat(4) + string) // indentación para formato correcto
                 .reduce((String s1, String s2) -> s1 + "," + System.lineSeparator() + s2) // , y salto de línea
