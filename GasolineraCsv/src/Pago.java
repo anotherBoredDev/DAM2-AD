@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Pago implements Comparable<Pago> {
     private final int id;
@@ -15,6 +16,18 @@ public class Pago implements Comparable<Pago> {
         this.importe = importe;
         this.litros = litros;
         this.combustible = combustible;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Pago pago = (Pago) o;
+        return idCliente == pago.idCliente && Float.compare(importe, pago.importe) == 0 && Float.compare(litros, pago.litros) == 0 && Objects.equals(fecha, pago.fecha) && Objects.equals(combustible, pago.combustible);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCliente, fecha, importe, litros, combustible);
     }
 
     @Override

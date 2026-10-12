@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Cliente implements Comparable<Cliente> {
     private final int id;
     private final String nombre;
@@ -9,6 +11,18 @@ public class Cliente implements Comparable<Cliente> {
         this.nombre = nombre;
         this.telefono = telefono;
         this.matricula = matricula;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(nombre, cliente.nombre) && Objects.equals(telefono, cliente.telefono) && Objects.equals(matricula, cliente.matricula);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, telefono, matricula);
     }
 
     @Override
