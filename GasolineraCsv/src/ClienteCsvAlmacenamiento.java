@@ -37,6 +37,11 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
     }
 
     @Override
+    public boolean existeFicheroAlmacenamiento() {
+        return Files.exists(fichero);
+    }
+
+    @Override
     public void guardar(Cliente entidad) {
         try {
             String registro = String.format(Locale.ROOT, "%d,%s,%s,%s;",

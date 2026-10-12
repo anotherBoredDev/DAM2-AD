@@ -29,6 +29,11 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
         }
     }
 
+    @Override
+    public boolean existeFicheroAlmacenamiento() {
+        return Files.exists(fichero);
+    }
+
     private String convertirClienteToJson(Cliente c) {
         return String.format(Locale.ROOT, "{\"id\": %d,\"nombre\": \"%s\",\"telefono\": \"%s\",\"matricula\": \"%s\"}", c.getId(), c.getNombre(), c.getTelefono(), c.getMatricula());
     }

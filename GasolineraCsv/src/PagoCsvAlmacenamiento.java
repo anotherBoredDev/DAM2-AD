@@ -39,6 +39,11 @@ public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
     }
 
     @Override
+    public boolean existeFicheroAlmacenamiento() {
+        return Files.exists(fichero);
+    }
+
+    @Override
     public void guardar(Pago entidad) {
         try {
             String registro = String.format(Locale.ROOT, "%d,%d,%s,%.2f,%f,%s;",

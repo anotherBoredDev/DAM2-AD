@@ -34,6 +34,11 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
         }
     }
 
+    @Override
+    public boolean existeFicheroAlmacenamiento() {
+        return Files.exists(fichero);
+    }
+
     private String convertirPagoToJson(Pago p) {
         return String.format(Locale.ROOT, "{\"id\": %d,\"idCliente\": %d,\"fecha\": \"%s\",\"importe\": \"%.2f\",\"litros\": \"%f\",\"combustible\": \"%s\"}",
                 p.getId(),
