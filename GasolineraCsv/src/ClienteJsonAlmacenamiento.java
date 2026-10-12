@@ -80,7 +80,11 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
             String linea1 = reader.readLine();
             String linea2 = reader.readLine();
 
-            if (linea1 == null || linea2 == null) {
+            if (linea1 == null) {
+                return clientes; // Fichero vacío, no hay error.
+            }
+
+            if (linea2 == null) {
                 throw new RuntimeException("Error: Json inválido en el fichero " + fichero + ".");
             }
 
