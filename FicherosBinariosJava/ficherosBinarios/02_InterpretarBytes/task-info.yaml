@@ -4,8 +4,8 @@ files:
   - name: src/Main.java
     visible: true
     placeholders:
-      - offset: 112
-        length: 50
+      - offset: 182
+        length: 102
         placeholder_text: "\"\" /* TODO: decodificar como ASCII */"
         initial_state:
           length: 37
@@ -13,8 +13,8 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: jGFPmdQJDe9jkljjHe4LWhsJZeDsRUxytMJtyeK+bWae9GdFZDnVOZvDJI6WhIyX
         selected: true
-        status: Unchecked
-      - offset: 356
+        status: Solved
+      - offset: 478
         length: 8
         placeholder_text: "0 /* TODO: copiar el valor con signo */"
         initial_state:
@@ -23,8 +23,8 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: wYAIr+MeleDmxZJvM3giWg==
         selected: true
-        status: Unchecked
-      - offset: 594
+        status: Solved
+      - offset: 716
         length: 28
         placeholder_text: "0 /* TODO: convertir este byte sin signo */"
         initial_state:
@@ -33,10 +33,13 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: jpS5/HpHvGJkKT9I0kVq5QFF5VhY+2P54sD1qmnltLU=
         selected: true
-        status: Unchecked
+        status: Solved
     learner_created: false
   - name: test/Tests.java
     visible: false
     learner_created: false
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 16 Oct 2026 06:26:27 UTC"
 record: -1

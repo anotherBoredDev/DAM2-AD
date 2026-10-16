@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-16T06:26:27.662Z" hostname="LB-DAM2-07" time="0.038">
+  <properties/>
+  <testcase name="convierteBytesAsciiEnTexto()" classname="Tests" time="0.024"/>
+  <testcase name="convierteTodosLosElementosSinCambiarSuOrden()" classname="Tests" time="0.002"/>
+  <testcase name="conservaLaInterpretacionNumericaConSigno()" classname="Tests" time="0.0"/>
+  <testcase name="admiteArraysVaciosEnLasTresInterpretaciones()" classname="Tests" time="0.0"/>
+  <testcase name="interpretaLosOchoBitsComoValorSinSigno()" classname="Tests" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

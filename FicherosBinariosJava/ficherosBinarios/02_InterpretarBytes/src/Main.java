@@ -1,8 +1,10 @@
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class Main {
     public static String comoAscii(byte[] datos) {
-        return Byte.toString() /* TODO: decodificar como ASCII */;
+        return StandardCharsets.US_ASCII.decode(ByteBuffer.wrap(datos)).toString() /* TODO: decodificar como ASCII */;
     }
 
     public static int[] comoNumerosConSigno(byte[] datos) {
