@@ -4,28 +4,28 @@ files:
   - name: src/Main.java
     visible: true
     placeholders:
-      - offset: 251
-        length: 39
+      - offset: 236
+        length: 63
         placeholder_text: "new byte[0] /* TODO: codificar texto */"
         initial_state:
           length: 39
           offset: 251
         initialized_from_dependency: false
         encrypted_possible_answer: MT6QkPYgmnNGjRSkapMp2xFTvFzL/ViB7HWQ4PD/spvuVDs7PTaP8s1Snk4VVJk4
-        selected: false
-        status: Unchecked
-      - offset: 300
-        length: 26
+        selected: true
+        status: Solved
+      - offset: 236
+        length: 88
         placeholder_text: "// TODO: guardar los bytes"
         initial_state:
           length: 26
           offset: 300
         initialized_from_dependency: false
         encrypted_possible_answer: 42zzM4slLg7kQ90bL/Hi2lfGYgrCTMUNVIbDIP3kkGA=
-        selected: false
-        status: Unchecked
-      - offset: 356
-        length: 43
+        selected: true
+        status: Solved
+      - offset: 354
+        length: 24
         placeholder_text: "new byte[0] /* TODO: recuperar los bytes */"
         initial_state:
           length: 43
@@ -33,9 +33,9 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: wZBjMAjzyDSnNkxWiI/nwy78+XpHR24gC08eqGIBKEA=
         selected: false
-        status: Unchecked
-      - offset: 416
-        length: 38
+        status: Solved
+      - offset: 395
+        length: 47
         placeholder_text: "\"\" /* TODO: decodificar recuperados */"
         initial_state:
           length: 38
@@ -43,10 +43,13 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: zcHXzWC6VvN+WvFUfC2MQXrSSOwtHzCJEtS6B8POgbZxIMvW+pH4BAgmIfenTBaj
         selected: false
-        status: Unchecked
+        status: Solved
     learner_created: false
   - name: test/Tests.java
     visible: false
     learner_created: false
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 16 Oct 2026 06:38:21 UTC"
 record: -1

@@ -8,12 +8,12 @@ public class Main {
                           double saldo, boolean activo) {}
     public static Cliente leer(Path ruta) throws IOException {
         try (DataInputStream in = new DataInputStream(Files.newInputStream(ruta))) {
-            int id = 0 /* TODO: leer id */;
-            String nombre = "" /* TODO: leer nombre */;
-            String telefono = "" /* TODO: leer teléfono */;
-            String matricula = "" /* TODO: leer matrícula */;
-            double saldo = 0.0 /* TODO: leer saldo */;
-            boolean activo = false /* TODO: leer activo */;
+            int id = in.readInt();
+            String nombre = in.readUTF();
+            String telefono = in.readUTF();
+            String matricula = in.readUTF();
+            double saldo = in.readDouble();
+            boolean activo = in.readBoolean();
             return new Cliente(id, nombre, telefono, matricula, saldo, activo);
         }
     }

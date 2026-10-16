@@ -4,7 +4,7 @@ import java.nio.file.Path;
 
 public class Main {
     public static void guardar(Path ruta, byte[] datos) throws IOException {
-        // TODO: guardar datos en ruta
+        Files.write(ruta, datos);
     }
 
     public static void main(String[] args) throws IOException {

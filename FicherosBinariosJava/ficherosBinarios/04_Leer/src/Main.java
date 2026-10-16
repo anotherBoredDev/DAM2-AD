@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class Main {
     public static byte[] leer(Path ruta) throws IOException {
-        return new byte[0] /* TODO: leer ruta */;
+        return Files.readAllBytes(ruta);
     }
 
     public static void main(String[] args) throws IOException {

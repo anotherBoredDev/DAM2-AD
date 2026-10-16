@@ -9,7 +9,7 @@ public class Main {
 
     // Paso A: la longitud se comprueba antes de acceder a los bytes.
     public static boolean tieneFirmaBmp(byte[] datos) {
-        return datos.length >= 2 && false /* TODO A: comprobar BM */;
+        return datos.length >= 2 && datos[0] == 'B' && datos[1] == 'M';
     }
 
     // Paso B: este ejercicio admite BITMAPINFOHEADER de 40 bytes.
@@ -17,12 +17,12 @@ public class Main {
         if (datos.length < 54 || !tieneFirmaBmp(datos)) {
             throw new IllegalArgumentException("Cabecera BMP incompleta o firma incorrecta");
         }
-        ByteBuffer buffer = ByteBuffer.wrap(datos).order(ByteOrder.BIG_ENDIAN /* TODO B: orden BMP */);
-        int comienzoPixeles = 0; // TODO B: leer comienzo de píxeles
-        int ancho = 0; // TODO B
-        int alto = 0; // TODO B
-        int bitsPorPixel = 0; // TODO B
-        int compresion = -1; // TODO B
+        ByteBuffer buffer = ByteBuffer.wrap(datos).order(ByteOrder.LITTLE_ENDIAN);
+        int comienzoPixeles = buffer.getInt(10);
+        int ancho = buffer.getInt(18);
+        int alto = buffer.getInt(22);
+        int bitsPorPixel = Short.toUnsignedInt(buffer.getShort(28));
+        int compresion = buffer.getInt(30);
         validarCabecera(datos, buffer, comienzoPixeles, ancho, alto, bitsPorPixel, compresion);
         return new Cabecera(comienzoPixeles, ancho, alto);
     }
@@ -51,9 +51,9 @@ public class Main {
         if (x < 0 || x >= c.ancho() || y < 0 || y >= altoReal) {
             throw new IllegalArgumentException("Píxel fuera de la imagen");
         }
-        long bytesPorFila = 0L /* TODO C: alinear fila a 4 bytes */;
-        int filaEnFichero = 0 /* TODO C: orientar la fila */;
-        return 0 /* TODO C: posición absoluta */;
+        long bytesPorFila = ((c.ancho * 3L + 3) / 4) * 4;
+        int filaEnFichero = c.alto > 0 ? altoReal - 1 - y : y;
+        return Math.toIntExact(c.comienzoPixeles + filaEnFichero * bytesPorFila + x * 3L);
     }
 
     // Paso D: el método recibe RGB, pero el fichero almacena BGR.
@@ -63,7 +63,9 @@ public class Main {
             throw new IllegalArgumentException("Cada componente debe estar entre 0 y 255");
         }
         int p = posicion(c, x, y);
-        // TODO D: escribir los tres componentes en orden BGR
+        datos[p] = (byte) azul;
+        datos[p + 1] = (byte) verde;
+        datos[p + 2] = (byte) rojo;
     }
 
     // Paso E: guardar una copia. El origen del ejemplo siempre se conserva.
@@ -76,7 +78,7 @@ public class Main {
         byte[] datos = Files.readAllBytes(origen);
         Cabecera c = leerCabecera(datos);
         pintarPixel(datos, c, x, y, rojo, verde, azul);
-        // TODO E: guardar los bytes modificados
+        Files.write(destino, datos);
     }
 
     public static void main(String[] args) {

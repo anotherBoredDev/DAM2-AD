@@ -5,7 +5,7 @@ files:
     visible: true
     placeholders:
       - offset: 206
-        length: 33
+        length: 24
         placeholder_text: "new byte[0] /* TODO: leer ruta */"
         initial_state:
           length: 33
@@ -13,7 +13,7 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: wZBjMAjzyDSnNkxWiI/nwy78+XpHR24gC08eqGIBKEA=
         selected: false
-        status: Unchecked
+        status: Solved
     learner_created: false
   - name: test/Tests.java
     visible: false
@@ -22,5 +22,8 @@ files:
     visible: true
     is_binary: true
     learner_created: false
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 16 Oct 2026 06:35:34 UTC"
 record: -1

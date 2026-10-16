@@ -5,10 +5,10 @@ import java.nio.file.Path;
 
 public class Main {
     public static String idaYVuelta(Path ruta, String texto) throws IOException {
-        byte[] datos = new byte[0] /* TODO: codificar texto */;
-        // TODO: guardar los bytes
-        byte[] recuperados = new byte[0] /* TODO: recuperar los bytes */;
-        return "" /* TODO: decodificar recuperados */;
+        byte[] datos = texto.getBytes(StandardCharsets.UTF_8);
+        Files.write(ruta, datos);
+        byte[] recuperados = Files.readAllBytes(ruta);
+        return new String(recuperados, StandardCharsets.UTF_8);
     }
 
     public static void main(String[] args) throws IOException {

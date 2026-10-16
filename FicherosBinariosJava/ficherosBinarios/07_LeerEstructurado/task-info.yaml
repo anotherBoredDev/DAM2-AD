@@ -5,7 +5,7 @@ files:
     visible: true
     placeholders:
       - offset: 448
-        length: 21
+        length: 12
         placeholder_text: "0 /* TODO: leer id */"
         initial_state:
           length: 21
@@ -13,9 +13,9 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: 2OfyRf7yw8A3k0gOx+8q5g==
         selected: false
-        status: Unchecked
-      - offset: 499
-        length: 26
+        status: Solved
+      - offset: 490
+        length: 12
         placeholder_text: "\"\" /* TODO: leer nombre */"
         initial_state:
           length: 26
@@ -23,9 +23,9 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: HceVrP07nf/jkarkz8821Q==
         selected: false
-        status: Unchecked
-      - offset: 557
-        length: 28
+        status: Solved
+      - offset: 534
+        length: 12
         placeholder_text: "\"\" /* TODO: leer teléfono */"
         initial_state:
           length: 28
@@ -33,9 +33,9 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: HceVrP07nf/jkarkz8821Q==
         selected: false
-        status: Unchecked
-      - offset: 618
-        length: 29
+        status: Solved
+      - offset: 579
+        length: 12
         placeholder_text: "\"\" /* TODO: leer matrícula */"
         initial_state:
           length: 29
@@ -43,9 +43,9 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: HceVrP07nf/jkarkz8821Q==
         selected: false
-        status: Unchecked
-      - offset: 676
-        length: 26
+        status: Solved
+      - offset: 620
+        length: 15
         placeholder_text: "0.0 /* TODO: leer saldo */"
         initial_state:
           length: 26
@@ -53,9 +53,9 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: +cPFx6ZWBQ4pZvDzuBJo0Q==
         selected: false
-        status: Unchecked
-      - offset: 733
-        length: 29
+        status: Solved
+      - offset: 666
+        length: 16
         placeholder_text: "false /* TODO: leer activo */"
         initial_state:
           length: 29
@@ -63,7 +63,7 @@ files:
         initialized_from_dependency: false
         encrypted_possible_answer: 4G5Dl9KDOQlWhZsfqL5l/vxKM94ZhQPPgFdn7ojvujA=
         selected: false
-        status: Unchecked
+        status: Solved
     learner_created: false
   - name: test/Tests.java
     visible: false
@@ -72,5 +72,8 @@ files:
     visible: true
     is_binary: true
     learner_created: false
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 16 Oct 2026 06:54:54 UTC"
 record: -1

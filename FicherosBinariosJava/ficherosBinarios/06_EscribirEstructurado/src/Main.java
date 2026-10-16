@@ -8,7 +8,12 @@ public class Main {
                           double saldo, boolean activo) {}
     public static void guardar(Path ruta, Cliente cliente) throws IOException {
         try (DataOutputStream out = new DataOutputStream(Files.newOutputStream(ruta))) {
-            // TODO: escribir los seis campos, en el orden acordado
+            out.writeInt(cliente.id);
+            out.writeUTF(cliente.nombre);
+            out.writeUTF(cliente.telefono);
+            out.writeUTF(cliente.matricula);
+            out.writeDouble(cliente.saldo);
+            out.writeBoolean(cliente.activo);
         }
     }
 
