@@ -6,21 +6,20 @@
   };
 
   outputs =
-    { self, nixpkgs }:
+    inputs:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+      pkgsUnfree = import inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
     in
     {
       devShells.${system}.default = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          git
-          gh
-          jdk21
-          jetbrains.idea
+        packages = [
+          pkgs.jdk21
+          pkgsUnfree.jetbrains.idea
         ];
       };
     };
