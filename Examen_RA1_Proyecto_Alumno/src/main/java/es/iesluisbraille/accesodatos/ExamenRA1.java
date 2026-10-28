@@ -252,8 +252,7 @@ public class ExamenRA1 {
             return;
         }
 
-        // Si no contiene. TODO lógica.
-        alumnos = combinarAlumnos(alumnos, alumno1);
+        alumnos = combinarAlumnos(alumnos, alumno1); // Añade alumno 1
 
         try (BufferedWriter bw = Files.newBufferedWriter(ficheroSalida, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)) {
             alumnos.sort(Alumno::compareTo);
