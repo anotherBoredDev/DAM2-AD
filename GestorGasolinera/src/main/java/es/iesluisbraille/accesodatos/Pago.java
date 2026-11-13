@@ -1,0 +1,67 @@
+package es.iesluisbraille.accesodatos;
+
+import java.time.LocalDate;
+import java.util.Objects;
+
+public class Pago implements Comparable<Pago> {
+    private final int id;
+    private final int idCliente;
+    private final LocalDate fecha;
+    private final float importe;
+    private final float litros;
+    private final String combustible;
+
+    public Pago(int id, int idCliente, LocalDate fecha, float importe, float litros, String combustible) {
+        this.id = id;
+        this.idCliente = idCliente;
+        this.fecha = fecha;
+        this.importe = importe;
+        this.litros = litros;
+        this.combustible = combustible;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Pago pago = (Pago) o;
+        return idCliente == pago.idCliente && Float.compare(importe, pago.importe) == 0 && Float.compare(litros, pago.litros) == 0 && Objects.equals(fecha, pago.fecha) && Objects.equals(combustible, pago.combustible);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCliente, fecha, importe, litros, combustible);
+    }
+
+    @Override
+    public int compareTo(Pago o) {
+        int comparacion = fecha.compareTo(o.getFecha());
+        if (comparacion == 0) {
+            comparacion = o.getId() - id;
+        }
+        return comparacion;
+    }
+
+    public String getCombustible() {
+        return combustible;
+    }
+
+    public float getLitros() {
+        return litros;
+    }
+
+    public float getImporte() {
+        return importe;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public int getId() {
+        return id;
+    }
+}
