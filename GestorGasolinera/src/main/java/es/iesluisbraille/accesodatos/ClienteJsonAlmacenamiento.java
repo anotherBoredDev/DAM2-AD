@@ -35,7 +35,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     }
 
     @Override
-    public boolean existeFicheroAlmacenamiento() {
+    public boolean existeAlmacenamiento() {
         return Files.exists(fichero);
     }
 

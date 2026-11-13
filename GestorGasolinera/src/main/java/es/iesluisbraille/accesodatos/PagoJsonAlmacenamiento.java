@@ -37,7 +37,7 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
     }
 
     @Override
-    public boolean existeFicheroAlmacenamiento() {
+    public boolean existeAlmacenamiento() {
         return Files.exists(fichero);
     }
 

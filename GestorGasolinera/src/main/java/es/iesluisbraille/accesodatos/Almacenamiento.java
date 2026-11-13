@@ -3,7 +3,7 @@ package es.iesluisbraille.accesodatos;
 import java.util.Collection;
 
 public interface Almacenamiento<T> {
-    boolean existeFicheroAlmacenamiento();
+    boolean existeAlmacenamiento();
 
     void guardar(T entidad);
 

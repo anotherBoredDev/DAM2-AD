@@ -28,7 +28,7 @@ public class MigracionCsvToJson {
         List<Cliente> clientesParaMigrar = (List<Cliente>) clienteCsvAlmacenamiento.obtenerTodos();
         int clientesMigrados = 0;
 
-        if (!clienteJsonAlmacenamiento.existeFicheroAlmacenamiento()) {
+        if (!clienteJsonAlmacenamiento.existeAlmacenamiento()) {
             clientesMigrados = clientesParaMigrar.size();
             clienteJsonAlmacenamiento.guardarTodos(clientesParaMigrar);
         }
@@ -40,7 +40,7 @@ public class MigracionCsvToJson {
         List<Pago> pagosParaMigrar = (List<Pago>) pagoCsvAlmacenamiento.obtenerTodos();
         int pagosMigrados = 0;
 
-        if (!pagoJsonAlmacenamiento.existeFicheroAlmacenamiento()) {
+        if (!pagoJsonAlmacenamiento.existeAlmacenamiento()) {
             pagosMigrados = pagosParaMigrar.size();
             pagoJsonAlmacenamiento.guardarTodos(pagosParaMigrar);
         }
