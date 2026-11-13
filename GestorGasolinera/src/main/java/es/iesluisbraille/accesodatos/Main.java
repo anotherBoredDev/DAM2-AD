@@ -7,12 +7,16 @@ public class Main {
         try (Scanner scanner = new Scanner(System.in)) {
             LectorConsola lectorConsola = new LectorConsola(scanner);
 
-            Almacenamiento<Cliente> clienteAlmacenamiento = new ClienteJsonAlmacenamiento("datos");
+            Almacenamiento<Cliente> clienteAlmacenamiento = new ClienteMySqlAlmacenamiento();
             Almacenamiento<Pago> pagoAlmacenamiento = new PagoJsonAlmacenamiento("datos");
 
-            if (!clienteAlmacenamiento.existeFicheroAlmacenamiento() || !pagoAlmacenamiento.existeFicheroAlmacenamiento()) {
-                realizarMigracion(lectorConsola);
+            if (clienteAlmacenamiento.getClass() == ClienteJsonAlmacenamiento.class
+                    && pagoAlmacenamiento.getClass() == PagoJsonAlmacenamiento.class) {
+                if (!clienteAlmacenamiento.existeAlmacenamiento() || !pagoAlmacenamiento.existeAlmacenamiento()) {
+                    realizarMigracion(lectorConsola);
+                }
             }
+
 
             ClienteGestor clienteGestor = new ClienteGestor(clienteAlmacenamiento);
             PagoGestor pagoGestor = new PagoGestor(pagoAlmacenamiento);
