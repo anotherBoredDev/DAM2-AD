@@ -1,9 +1,9 @@
 package es.iesluisbraille.accesodatos;
 
 import es.iesluisbraille.accesodatos.almacenamiento.Almacenamiento;
-import es.iesluisbraille.accesodatos.almacenamiento.json.ClienteJsonAlmacenamiento;
-import es.iesluisbraille.accesodatos.almacenamiento.mysql.ClienteMySqlAlmacenamiento;
-import es.iesluisbraille.accesodatos.almacenamiento.json.PagoJsonAlmacenamiento;
+import es.iesluisbraille.accesodatos.almacenamiento.sql.ClienteMySqlAlmacenamiento;
+import es.iesluisbraille.accesodatos.almacenamiento.sql.ConexionDB;
+import es.iesluisbraille.accesodatos.almacenamiento.sql.PagoMySqlAlmacenamiento;
 import es.iesluisbraille.accesodatos.cli.LectorConsola;
 import es.iesluisbraille.accesodatos.cli.MenuPrincipal;
 import es.iesluisbraille.accesodatos.entidad.Cliente;
@@ -20,16 +20,23 @@ public class Main {
         try (Scanner scanner = new Scanner(System.in)) {
             LectorConsola lectorConsola = new LectorConsola(scanner);
 
-            Almacenamiento<Cliente> clienteAlmacenamiento = new ClienteMySqlAlmacenamiento();
-            Almacenamiento<Pago> pagoAlmacenamiento = new PagoJsonAlmacenamiento("datos");
+            // Conexión por MySQL
+            ConexionDB conexionDB = new ConexionDB(
+                    System.getenv("mysql_url"),
+                    System.getenv("mysql_usuario"),
+                    System.getenv("mysql_password")
+            );
 
-            if (clienteAlmacenamiento.getClass() == ClienteJsonAlmacenamiento.class
-                    && pagoAlmacenamiento.getClass() == PagoJsonAlmacenamiento.class) {
-                if (!clienteAlmacenamiento.existeAlmacenamiento() || !pagoAlmacenamiento.existeAlmacenamiento()) {
-                    realizarMigracion(lectorConsola);
-                }
-            }
+            Almacenamiento<Cliente> clienteAlmacenamiento = new ClienteMySqlAlmacenamiento(conexionDB);
+            Almacenamiento<Pago> pagoAlmacenamiento = new PagoMySqlAlmacenamiento(conexionDB);
 
+            // Bloque para almacenamiento Json
+            // Almacenamiento<Cliente> clienteAlmacenamiento = new ClienteMySqlAlmacenamiento();
+            // Almacenamiento<Pago> pagoAlmacenamiento = new PagoJsonAlmacenamiento("datos");
+            //
+            // if (!clienteAlmacenamiento.existeAlmacenamiento() || !pagoAlmacenamiento.existeAlmacenamiento()) {
+            //     realizarMigracion(lectorConsola);
+            // }
 
             ClienteGestor clienteGestor = new ClienteGestor(clienteAlmacenamiento);
             PagoGestor pagoGestor = new PagoGestor(pagoAlmacenamiento);
