@@ -1,4 +1,7 @@
-package es.iesluisbraille.accesodatos;
+package es.iesluisbraille.accesodatos.gestor;
+
+import es.iesluisbraille.accesodatos.almacenamiento.Almacenamiento;
+import es.iesluisbraille.accesodatos.entidad.Pago;
 
 import java.time.LocalDate;
 import java.util.LinkedList;

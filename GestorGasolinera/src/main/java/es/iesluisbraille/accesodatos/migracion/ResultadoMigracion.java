@@ -1,4 +1,4 @@
-package es.iesluisbraille.accesodatos;
+package es.iesluisbraille.accesodatos.migracion;
 
 public record ResultadoMigracion(int clientesMigrados, int pagosMigrados) {
 

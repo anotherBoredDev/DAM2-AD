@@ -1,25 +1,30 @@
-package es.iesluisbraille.accesodatos;
+package es.iesluisbraille.accesodatos.almacenamiento.csv;
+
+import es.iesluisbraille.accesodatos.almacenamiento.Almacenamiento;
+import es.iesluisbraille.accesodatos.entidad.Pago;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
 import static java.nio.file.StandardOpenOption.*;
 
-public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
+public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
     private final Path directorio;
     private final Path fichero;
     private final String cabecera;
 
-    public ClienteCsvAlmacenamiento(String directorio) {
+    public PagoCsvAlmacenamiento(String directorio) {
         this.directorio = Path.of(directorio);
-        this.fichero = this.directorio.resolve("clientes.csv");
-        this.cabecera = "id,nombre,telefono,matricula;" + System.lineSeparator();
+        this.fichero = this.directorio.resolve("pagos.csv");
+        this.cabecera = "id,idCliente,fecha,importe,litros,combustible;" + System.lineSeparator();
         prepararAlmacenamiento();
     }
 
@@ -44,13 +49,15 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
     }
 
     @Override
-    public void guardar(Cliente entidad) {
+    public void guardar(Pago entidad) {
         try {
-            String registro = String.format(Locale.ROOT, "%d,%s,%s,%s;",
+            String registro = String.format(Locale.ROOT, "%d,%d,%s,%.2f,%f,%s;",
                     entidad.getId(),
-                    entidad.getNombre(),
-                    entidad.getTelefono(),
-                    entidad.getMatricula()
+                    entidad.getIdCliente(),
+                    entidad.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                    entidad.getImporte(),
+                    entidad.getLitros(),
+                    entidad.getCombustible()
             ) + System.lineSeparator();
 
             Files.writeString(fichero, registro,
@@ -59,16 +66,16 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
             );
 
         } catch (IOException e) {
-            System.out.println("Se ha producido un error al guardar un cliente en " + fichero + ". Id cliente " + entidad.getId());
+            System.out.println("Se ha producido un error al guardar un pago en " + fichero + ". Id pago " + entidad.getId());
         }
     }
 
     @Override
-    public void guardarTodos(Collection<Cliente> entidades) {
+    public void guardarTodos(Collection<Pago> entidades) {
         try {
             Files.writeString(fichero, cabecera, StandardCharsets.UTF_8, TRUNCATE_EXISTING);
 
-            for (Cliente entidad : entidades) {
+            for (Pago entidad : entidades) {
                 guardar(entidad);
             }
         } catch (IOException e) {
@@ -77,8 +84,8 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
     }
 
     @Override
-    public Collection<Cliente> obtenerTodos() {
-        Collection<Cliente> clientes = new ArrayList<>();
+    public Collection<Pago> obtenerTodos() {
+        Collection<Pago> pagos = new ArrayList<>();
 
         try (BufferedReader reader = Files.newBufferedReader(fichero)) {
             String linea = reader.readLine(); // lee el header del archivo csv
@@ -90,27 +97,29 @@ public class ClienteCsvAlmacenamiento implements Almacenamiento<Cliente> {
                 lineaActual++;
 
                 linea = linea.substring(0, linea.indexOf(";")); // Busca el último carácter de la línea (;) y lo elimina, incluyendo lo posterior
-                String[] atributosCliente = linea.split(",");
+                String[] atributosPago = linea.split(",");
 
-                if (atributosCliente.length != cantidadCampos) {
+                if (atributosPago.length != cantidadCampos) {
                     System.err.println("Registro corrupto en " + fichero + " en linea " + lineaActual);
                     continue;
                 }
 
-                Cliente c = new Cliente(
-                        Integer.parseInt(atributosCliente[0]),
-                        atributosCliente[1],
-                        atributosCliente[2],
-                        atributosCliente[3]
+                Pago p = new Pago(
+                        Integer.parseInt(atributosPago[0]),
+                        Integer.parseInt(atributosPago[1]),
+                        LocalDate.parse(atributosPago[2], DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                        Float.parseFloat(atributosPago[3]),
+                        Float.parseFloat(atributosPago[4]),
+                        atributosPago[5]
                 );
 
-                clientes.add(c);
+                pagos.add(p);
             }
 
         } catch (IOException e) {
             System.out.println("Se ha producido un error al leer los datos de " + fichero);
         }
 
-        return clientes;
+        return pagos;
     }
 }

@@ -1,5 +1,18 @@
 package es.iesluisbraille.accesodatos;
 
+import es.iesluisbraille.accesodatos.almacenamiento.Almacenamiento;
+import es.iesluisbraille.accesodatos.almacenamiento.json.ClienteJsonAlmacenamiento;
+import es.iesluisbraille.accesodatos.almacenamiento.mysql.ClienteMySqlAlmacenamiento;
+import es.iesluisbraille.accesodatos.almacenamiento.json.PagoJsonAlmacenamiento;
+import es.iesluisbraille.accesodatos.cli.LectorConsola;
+import es.iesluisbraille.accesodatos.cli.MenuPrincipal;
+import es.iesluisbraille.accesodatos.entidad.Cliente;
+import es.iesluisbraille.accesodatos.entidad.Pago;
+import es.iesluisbraille.accesodatos.gestor.ClienteGestor;
+import es.iesluisbraille.accesodatos.gestor.PagoGestor;
+import es.iesluisbraille.accesodatos.migracion.MigracionCsvToJson;
+import es.iesluisbraille.accesodatos.migracion.ResultadoMigracion;
+
 import java.util.Scanner;
 
 public class Main {

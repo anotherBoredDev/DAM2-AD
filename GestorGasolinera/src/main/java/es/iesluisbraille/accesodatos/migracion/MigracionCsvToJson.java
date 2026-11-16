@@ -1,4 +1,11 @@
-package es.iesluisbraille.accesodatos;
+package es.iesluisbraille.accesodatos.migracion;
+
+import es.iesluisbraille.accesodatos.almacenamiento.csv.ClienteCsvAlmacenamiento;
+import es.iesluisbraille.accesodatos.almacenamiento.json.ClienteJsonAlmacenamiento;
+import es.iesluisbraille.accesodatos.almacenamiento.csv.PagoCsvAlmacenamiento;
+import es.iesluisbraille.accesodatos.almacenamiento.json.PagoJsonAlmacenamiento;
+import es.iesluisbraille.accesodatos.entidad.Cliente;
+import es.iesluisbraille.accesodatos.entidad.Pago;
 
 import java.util.List;
 

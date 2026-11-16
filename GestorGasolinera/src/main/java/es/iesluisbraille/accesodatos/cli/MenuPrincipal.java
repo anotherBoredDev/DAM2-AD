@@ -1,4 +1,9 @@
-package es.iesluisbraille.accesodatos;
+package es.iesluisbraille.accesodatos.cli;
+
+import es.iesluisbraille.accesodatos.entidad.Cliente;
+import es.iesluisbraille.accesodatos.entidad.Pago;
+import es.iesluisbraille.accesodatos.gestor.ClienteGestor;
+import es.iesluisbraille.accesodatos.gestor.PagoGestor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

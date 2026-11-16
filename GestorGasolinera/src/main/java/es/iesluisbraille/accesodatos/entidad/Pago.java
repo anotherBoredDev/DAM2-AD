@@ -1,4 +1,4 @@
-package es.iesluisbraille.accesodatos;
+package es.iesluisbraille.accesodatos.entidad;
 
 import java.time.LocalDate;
 import java.util.Objects;

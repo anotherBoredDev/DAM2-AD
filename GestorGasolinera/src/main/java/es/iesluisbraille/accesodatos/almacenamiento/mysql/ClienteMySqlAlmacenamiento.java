@@ -1,11 +1,14 @@
-package es.iesluisbraille.accesodatos;
+package es.iesluisbraille.accesodatos.almacenamiento.mysql;
+
+import es.iesluisbraille.accesodatos.almacenamiento.Almacenamiento;
+import es.iesluisbraille.accesodatos.entidad.Cliente;
 
 import java.util.Collection;
 import java.util.List;
 
 public class ClienteMySqlAlmacenamiento implements Almacenamiento<Cliente> {
     public ClienteMySqlAlmacenamiento() {
-        if (!existeAlmacenamiento())  {
+        if (!existeAlmacenamiento()) {
             prepararAlmacenamiento();
         }
     }
