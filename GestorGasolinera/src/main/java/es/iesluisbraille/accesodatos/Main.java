@@ -23,8 +23,8 @@ public class Main {
             // Conexión por MySQL
             ConexionDB conexionDB = new ConexionDB(
                     System.getenv("mysql_url"),
-                    System.getenv("mysql_usuario"),
-                    System.getenv("mysql_password")
+                    System.getenv("mysql_usuario"), // gasolinera_user
+                    System.getenv("mysql_password") // gasolinera1234
             );
 
             Almacenamiento<Cliente> clienteAlmacenamiento = new ClienteMySqlAlmacenamiento(conexionDB);
