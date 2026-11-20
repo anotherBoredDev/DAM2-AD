@@ -1,5 +1,5 @@
 {
-  description = "Java devShell for nix";
+  description = "Java 21 + IDEA devshell";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -9,8 +9,7 @@
     inputs:
     let
       system = "x86_64-linux";
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
-      pkgsUnfree = import inputs.nixpkgs {
+      pkgs = import inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
@@ -19,8 +18,12 @@
       devShells.${system}.default = pkgs.mkShell {
         packages = [
           pkgs.jdk21
-          pkgsUnfree.jetbrains.idea
+          pkgs.intellij-idea
         ];
+
+        shellHook = ''
+          export JAVA_HOME="${pkgs.jdk21}"
+        '';
       };
     };
 }
