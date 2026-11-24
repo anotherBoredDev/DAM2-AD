@@ -19,6 +19,7 @@
         packages = [
           pkgs.jdk21
           pkgs.intellij-idea
+          pkgs.opencode-desktop
         ];
 
         shellHook = ''
