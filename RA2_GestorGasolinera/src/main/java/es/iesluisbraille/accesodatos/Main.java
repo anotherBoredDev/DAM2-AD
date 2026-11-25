@@ -1,18 +1,5 @@
 package es.iesluisbraille.accesodatos;
 
-import es.iesluisbraille.accesodatos.almacenamiento.Almacenamiento;
-import es.iesluisbraille.accesodatos.almacenamiento.sql.ClienteMySqlAlmacenamiento;
-import es.iesluisbraille.accesodatos.almacenamiento.sql.ConexionDB;
-import es.iesluisbraille.accesodatos.almacenamiento.sql.PagoMySqlAlmacenamiento;
-import es.iesluisbraille.accesodatos.cli.LectorConsola;
-import es.iesluisbraille.accesodatos.cli.MenuPrincipal;
-import es.iesluisbraille.accesodatos.entidad.Cliente;
-import es.iesluisbraille.accesodatos.entidad.Pago;
-import es.iesluisbraille.accesodatos.gestor.ClienteGestor;
-import es.iesluisbraille.accesodatos.gestor.PagoGestor;
-import es.iesluisbraille.accesodatos.migracion.MigracionCsvToJson;
-import es.iesluisbraille.accesodatos.migracion.ResultadoMigracion;
-
 import java.util.Scanner;
 
 public class Main {
@@ -20,23 +7,12 @@ public class Main {
         try (Scanner scanner = new Scanner(System.in)) {
             LectorConsola lectorConsola = new LectorConsola(scanner);
 
-            // Conexión por MySQL
-            ConexionDB conexionDB = new ConexionDB(
-                    System.getenv("mysql_url"),
-                    System.getenv("mysql_usuario"), // gasolinera_user
-                    System.getenv("mysql_password") // gasolinera1234
-            );
+            Almacenamiento<Cliente> clienteAlmacenamiento = new ClienteJsonAlmacenamiento("datos");
+            Almacenamiento<Pago> pagoAlmacenamiento = new PagoJsonAlmacenamiento("datos");
 
-            Almacenamiento<Cliente> clienteAlmacenamiento = new ClienteMySqlAlmacenamiento(conexionDB);
-            Almacenamiento<Pago> pagoAlmacenamiento = new PagoMySqlAlmacenamiento(conexionDB);
-
-            // Bloque para almacenamiento Json
-            // Almacenamiento<Cliente> clienteAlmacenamiento = new ClienteMySqlAlmacenamiento();
-            // Almacenamiento<Pago> pagoAlmacenamiento = new PagoJsonAlmacenamiento("datos");
-            //
-            // if (!clienteAlmacenamiento.existeAlmacenamiento() || !pagoAlmacenamiento.existeAlmacenamiento()) {
-            //     realizarMigracion(lectorConsola);
-            // }
+            if (!clienteAlmacenamiento.existeFicheroAlmacenamiento() || !pagoAlmacenamiento.existeFicheroAlmacenamiento()) {
+                realizarMigracion(lectorConsola);
+            }
 
             ClienteGestor clienteGestor = new ClienteGestor(clienteAlmacenamiento);
             PagoGestor pagoGestor = new PagoGestor(pagoAlmacenamiento);

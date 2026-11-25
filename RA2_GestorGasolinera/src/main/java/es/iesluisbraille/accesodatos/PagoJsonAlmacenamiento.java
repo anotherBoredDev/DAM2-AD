@@ -1,7 +1,4 @@
-package es.iesluisbraille.accesodatos.almacenamiento.json;
-
-import es.iesluisbraille.accesodatos.almacenamiento.Almacenamiento;
-import es.iesluisbraille.accesodatos.entidad.Pago;
+package es.iesluisbraille.accesodatos;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -40,7 +37,7 @@ public class PagoJsonAlmacenamiento implements Almacenamiento<Pago> {
     }
 
     @Override
-    public boolean existeAlmacenamiento() {
+    public boolean existeFicheroAlmacenamiento() {
         return Files.exists(fichero);
     }
 

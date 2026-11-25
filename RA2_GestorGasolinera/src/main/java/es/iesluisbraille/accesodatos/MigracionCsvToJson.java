@@ -1,11 +1,4 @@
-package es.iesluisbraille.accesodatos.migracion;
-
-import es.iesluisbraille.accesodatos.almacenamiento.csv.ClienteCsvAlmacenamiento;
-import es.iesluisbraille.accesodatos.almacenamiento.json.ClienteJsonAlmacenamiento;
-import es.iesluisbraille.accesodatos.almacenamiento.csv.PagoCsvAlmacenamiento;
-import es.iesluisbraille.accesodatos.almacenamiento.json.PagoJsonAlmacenamiento;
-import es.iesluisbraille.accesodatos.entidad.Cliente;
-import es.iesluisbraille.accesodatos.entidad.Pago;
+package es.iesluisbraille.accesodatos;
 
 import java.util.List;
 
@@ -35,7 +28,7 @@ public class MigracionCsvToJson {
         List<Cliente> clientesParaMigrar = (List<Cliente>) clienteCsvAlmacenamiento.obtenerTodos();
         int clientesMigrados = 0;
 
-        if (!clienteJsonAlmacenamiento.existeAlmacenamiento()) {
+        if (!clienteJsonAlmacenamiento.existeFicheroAlmacenamiento()) {
             clientesMigrados = clientesParaMigrar.size();
             clienteJsonAlmacenamiento.guardarTodos(clientesParaMigrar);
         }
@@ -47,7 +40,7 @@ public class MigracionCsvToJson {
         List<Pago> pagosParaMigrar = (List<Pago>) pagoCsvAlmacenamiento.obtenerTodos();
         int pagosMigrados = 0;
 
-        if (!pagoJsonAlmacenamiento.existeAlmacenamiento()) {
+        if (!pagoJsonAlmacenamiento.existeFicheroAlmacenamiento()) {
             pagosMigrados = pagosParaMigrar.size();
             pagoJsonAlmacenamiento.guardarTodos(pagosParaMigrar);
         }

@@ -1,7 +1,4 @@
-package es.iesluisbraille.accesodatos.almacenamiento.csv;
-
-import es.iesluisbraille.accesodatos.almacenamiento.Almacenamiento;
-import es.iesluisbraille.accesodatos.entidad.Pago;
+package es.iesluisbraille.accesodatos;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,7 +41,7 @@ public class PagoCsvAlmacenamiento implements Almacenamiento<Pago> {
     }
 
     @Override
-    public boolean existeAlmacenamiento() {
+    public boolean existeFicheroAlmacenamiento() {
         return Files.exists(fichero);
     }
 

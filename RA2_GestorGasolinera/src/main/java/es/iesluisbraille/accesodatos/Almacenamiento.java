@@ -1,9 +1,9 @@
-package es.iesluisbraille.accesodatos.almacenamiento;
+package es.iesluisbraille.accesodatos;
 
 import java.util.Collection;
 
 public interface Almacenamiento<T> {
-    boolean existeAlmacenamiento();
+    boolean existeFicheroAlmacenamiento();
 
     void guardar(T entidad);
 

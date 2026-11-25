@@ -1,17 +1,11 @@
-package es.iesluisbraille.accesodatos.almacenamiento.json;
-
-import es.iesluisbraille.accesodatos.almacenamiento.Almacenamiento;
-import es.iesluisbraille.accesodatos.entidad.Cliente;
+package es.iesluisbraille.accesodatos;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     private final String aperturaJson = "{" + System.lineSeparator() + "  [" + System.lineSeparator();
@@ -38,7 +32,7 @@ public class ClienteJsonAlmacenamiento implements Almacenamiento<Cliente> {
     }
 
     @Override
-    public boolean existeAlmacenamiento() {
+    public boolean existeFicheroAlmacenamiento() {
         return Files.exists(fichero);
     }
 

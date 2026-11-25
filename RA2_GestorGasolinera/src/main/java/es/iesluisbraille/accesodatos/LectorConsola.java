@@ -1,4 +1,4 @@
-package es.iesluisbraille.accesodatos.cli;
+package es.iesluisbraille.accesodatos;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
